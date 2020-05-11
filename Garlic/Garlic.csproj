@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MindFusion.Common, Version=1.3.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Licensing, Version=1.0.4.38034, Culture=neutral, PublicKeyToken=9d02e21d957ddaef" />
+    <Reference Include="MindFusion.Svg, Version=1.2.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.UI.WinForms, Version=1.2.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +57,12 @@
       <DependentUpon>Authorization.cs</DependentUpon>
     </Compile>
     <Compile Include="Controller\ControllerConsignment.cs" />
+    <Compile Include="Drying.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drying.Designer.cs">
+      <DependentUpon>Drying.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,8 +78,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQL\SQLFunction.cs" />
+    <Compile Include="Storage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Storage.Designer.cs">
+      <DependentUpon>Storage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drying.resx">
+      <DependentUpon>Drying.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -83,6 +102,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Storage.resx">
+      <DependentUpon>Storage.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

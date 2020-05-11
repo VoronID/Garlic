@@ -42,14 +42,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelLogo = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.panelTitleVar = new System.Windows.Forms.Panel();
             this.labelNavigation = new System.Windows.Forms.Label();
+            this.panelContent = new System.Windows.Forms.Panel();
             this.panelMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             this.panelTitleVar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(250, 720);
+            this.panelMenu.Size = new System.Drawing.Size(254, 720);
             this.panelMenu.TabIndex = 0;
             // 
             // btnMap
@@ -85,10 +86,13 @@
             this.btnMap.Location = new System.Drawing.Point(0, 530);
             this.btnMap.Name = "btnMap";
             this.btnMap.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnMap.Size = new System.Drawing.Size(250, 50);
+            this.btnMap.Size = new System.Drawing.Size(254, 50);
             this.btnMap.TabIndex = 43;
             this.btnMap.Text = "   Мапа";
             this.btnMap.UseVisualStyleBackColor = true;
+            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
+            this.btnMap.MouseEnter += new System.EventHandler(this.btnMap_MouseEnter);
+            this.btnMap.MouseLeave += new System.EventHandler(this.btnMap_MouseLeave);
             // 
             // btnSelling
             // 
@@ -102,10 +106,13 @@
             this.btnSelling.Location = new System.Drawing.Point(0, 480);
             this.btnSelling.Name = "btnSelling";
             this.btnSelling.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnSelling.Size = new System.Drawing.Size(250, 50);
+            this.btnSelling.Size = new System.Drawing.Size(254, 50);
             this.btnSelling.TabIndex = 42;
-            this.btnSelling.Text = "   Продаж та списання";
+            this.btnSelling.Text = "      Продаж та списання";
             this.btnSelling.UseVisualStyleBackColor = true;
+            this.btnSelling.Click += new System.EventHandler(this.btnSelling_Click);
+            this.btnSelling.MouseEnter += new System.EventHandler(this.btnSelling_MouseEnter);
+            this.btnSelling.MouseLeave += new System.EventHandler(this.btnSelling_MouseLeave);
             // 
             // btnWeighing
             // 
@@ -119,10 +126,13 @@
             this.btnWeighing.Location = new System.Drawing.Point(0, 430);
             this.btnWeighing.Name = "btnWeighing";
             this.btnWeighing.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnWeighing.Size = new System.Drawing.Size(250, 50);
+            this.btnWeighing.Size = new System.Drawing.Size(254, 50);
             this.btnWeighing.TabIndex = 41;
             this.btnWeighing.Text = "       Контрольне зважування";
             this.btnWeighing.UseVisualStyleBackColor = true;
+            this.btnWeighing.Click += new System.EventHandler(this.btnWeighing_Click);
+            this.btnWeighing.MouseEnter += new System.EventHandler(this.btnWeighing_MouseEnter);
+            this.btnWeighing.MouseLeave += new System.EventHandler(this.btnWeighing_MouseLeave);
             // 
             // btnRefrigerator
             // 
@@ -136,10 +146,13 @@
             this.btnRefrigerator.Location = new System.Drawing.Point(0, 380);
             this.btnRefrigerator.Name = "btnRefrigerator";
             this.btnRefrigerator.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnRefrigerator.Size = new System.Drawing.Size(250, 50);
+            this.btnRefrigerator.Size = new System.Drawing.Size(254, 50);
             this.btnRefrigerator.TabIndex = 40;
             this.btnRefrigerator.Text = "    Холодильник";
             this.btnRefrigerator.UseVisualStyleBackColor = true;
+            this.btnRefrigerator.Click += new System.EventHandler(this.btnRefrigerator_Click);
+            this.btnRefrigerator.MouseEnter += new System.EventHandler(this.btnRefrigerator_MouseEnter);
+            this.btnRefrigerator.MouseLeave += new System.EventHandler(this.btnRefrigerator_MouseLeave);
             // 
             // btnNewConsignment
             // 
@@ -153,10 +166,13 @@
             this.btnNewConsignment.Location = new System.Drawing.Point(0, 330);
             this.btnNewConsignment.Name = "btnNewConsignment";
             this.btnNewConsignment.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnNewConsignment.Size = new System.Drawing.Size(250, 50);
+            this.btnNewConsignment.Size = new System.Drawing.Size(254, 50);
             this.btnNewConsignment.TabIndex = 39;
             this.btnNewConsignment.Text = "   Нова партія";
             this.btnNewConsignment.UseVisualStyleBackColor = true;
+            this.btnNewConsignment.Click += new System.EventHandler(this.btnNewConsignment_Click);
+            this.btnNewConsignment.MouseEnter += new System.EventHandler(this.btnNewConsignment_MouseEnter);
+            this.btnNewConsignment.MouseLeave += new System.EventHandler(this.btnNewConsignment_MouseLeave);
             // 
             // btnCaliber
             // 
@@ -170,10 +186,13 @@
             this.btnCaliber.Location = new System.Drawing.Point(0, 280);
             this.btnCaliber.Name = "btnCaliber";
             this.btnCaliber.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnCaliber.Size = new System.Drawing.Size(250, 50);
+            this.btnCaliber.Size = new System.Drawing.Size(254, 50);
             this.btnCaliber.TabIndex = 38;
             this.btnCaliber.Text = "   Калібрування";
             this.btnCaliber.UseVisualStyleBackColor = true;
+            this.btnCaliber.Click += new System.EventHandler(this.btnCaliber_Click);
+            this.btnCaliber.MouseEnter += new System.EventHandler(this.btnCaliber_MouseEnter);
+            this.btnCaliber.MouseLeave += new System.EventHandler(this.btnCaliber_MouseLeave);
             // 
             // btnDrying
             // 
@@ -187,10 +206,13 @@
             this.btnDrying.Location = new System.Drawing.Point(0, 230);
             this.btnDrying.Name = "btnDrying";
             this.btnDrying.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnDrying.Size = new System.Drawing.Size(250, 50);
+            this.btnDrying.Size = new System.Drawing.Size(254, 50);
             this.btnDrying.TabIndex = 37;
             this.btnDrying.Text = "Сушка";
             this.btnDrying.UseVisualStyleBackColor = true;
+            this.btnDrying.Click += new System.EventHandler(this.btnDrying_Click);
+            this.btnDrying.MouseEnter += new System.EventHandler(this.btnDrying_MouseEnter);
+            this.btnDrying.MouseLeave += new System.EventHandler(this.btnDrying_MouseLeave);
             // 
             // btnWarehouse
             // 
@@ -204,11 +226,13 @@
             this.btnWarehouse.Location = new System.Drawing.Point(0, 180);
             this.btnWarehouse.Name = "btnWarehouse";
             this.btnWarehouse.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnWarehouse.Size = new System.Drawing.Size(250, 50);
+            this.btnWarehouse.Size = new System.Drawing.Size(254, 50);
             this.btnWarehouse.TabIndex = 36;
             this.btnWarehouse.Text = "      Приймання на склад";
             this.btnWarehouse.UseVisualStyleBackColor = true;
-
+            this.btnWarehouse.Click += new System.EventHandler(this.btnWarehouse_Click);
+            this.btnWarehouse.MouseEnter += new System.EventHandler(this.btnWarehouse_MouseEnter);
+            this.btnWarehouse.MouseLeave += new System.EventHandler(this.btnWarehouse_MouseLeave);
             // 
             // btnGarlic
             // 
@@ -216,16 +240,17 @@
             this.btnGarlic.FlatAppearance.BorderSize = 0;
             this.btnGarlic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGarlic.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnGarlic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
+            this.btnGarlic.ForeColor = System.Drawing.Color.Transparent;
             this.btnGarlic.Image = ((System.Drawing.Image)(resources.GetObject("btnGarlic.Image")));
             this.btnGarlic.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGarlic.Location = new System.Drawing.Point(0, 130);
             this.btnGarlic.Name = "btnGarlic";
             this.btnGarlic.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnGarlic.Size = new System.Drawing.Size(250, 50);
+            this.btnGarlic.Size = new System.Drawing.Size(254, 50);
             this.btnGarlic.TabIndex = 35;
             this.btnGarlic.Text = "Часник";
             this.btnGarlic.UseVisualStyleBackColor = true;
+            this.btnGarlic.Click += new System.EventHandler(this.btnGarlic_Click);
             this.btnGarlic.MouseEnter += new System.EventHandler(this.btnGarlic_MouseEnter);
             this.btnGarlic.MouseLeave += new System.EventHandler(this.btnGarlic_MouseLeave);
             // 
@@ -235,7 +260,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 80);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 50);
+            this.panel1.Size = new System.Drawing.Size(254, 50);
             this.panel1.TabIndex = 34;
             // 
             // pictureBox1
@@ -247,54 +272,64 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panelLogo
             // 
             this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
-            this.panelLogo.Controls.Add(this.pictureBox2);
+            this.panelLogo.Controls.Add(this.pictureBoxLogo);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(250, 80);
+            this.panelLogo.Size = new System.Drawing.Size(254, 80);
             this.panelLogo.TabIndex = 33;
             // 
-            // pictureBox2
+            // pictureBoxLogo
             // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(250, 80);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 34;
-            this.pictureBox2.TabStop = false;
+            this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
+            this.pictureBoxLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(254, 80);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 34;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // panelTitleVar
             // 
             this.panelTitleVar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.panelTitleVar.Controls.Add(this.labelNavigation);
             this.panelTitleVar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleVar.Location = new System.Drawing.Point(250, 0);
+            this.panelTitleVar.Location = new System.Drawing.Point(254, 0);
             this.panelTitleVar.Name = "panelTitleVar";
-            this.panelTitleVar.Size = new System.Drawing.Size(1030, 80);
+            this.panelTitleVar.Size = new System.Drawing.Size(1026, 80);
             this.panelTitleVar.TabIndex = 33;
             // 
             // labelNavigation
             // 
-            this.labelNavigation.AutoSize = true;
-            this.labelNavigation.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNavigation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelNavigation.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNavigation.ForeColor = System.Drawing.Color.White;
-            this.labelNavigation.Location = new System.Drawing.Point(466, 28);
+            this.labelNavigation.Location = new System.Drawing.Point(0, 0);
             this.labelNavigation.Name = "labelNavigation";
-            this.labelNavigation.Size = new System.Drawing.Size(74, 24);
+            this.labelNavigation.Size = new System.Drawing.Size(1026, 80);
             this.labelNavigation.TabIndex = 0;
             this.labelNavigation.Text = "label1";
+            this.labelNavigation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelContent
+            // 
+            this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContent.Location = new System.Drawing.Point(254, 80);
+            this.panelContent.Name = "panelContent";
+            this.panelContent.Size = new System.Drawing.Size(1026, 640);
+            this.panelContent.TabIndex = 34;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelTitleVar);
             this.Controls.Add(this.panelMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -304,9 +339,8 @@
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             this.panelTitleVar.ResumeLayout(false);
-            this.panelTitleVar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -327,8 +361,9 @@
         private System.Windows.Forms.Button btnGarlic;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Label labelNavigation;
+        private System.Windows.Forms.Panel panelContent;
     }
 }
 
