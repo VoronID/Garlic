@@ -209,16 +209,19 @@ namespace Garlic
         private void btnCaliber_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "КАЛІБРУВАННЯ";
+            OpenlyFormInPanel(new Calibration());
         }
 
         private void btnNewConsignment_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "НОВА ПАРТІЯ";
+            OpenlyFormInPanel(new NewConsignment());
         }
 
         private void btnRefrigerator_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ХОЛОДИЛЬНИК";
+            OpenlyFormInPanel(new Refrigerator());
         }
 
         private void btnWeighing_Click(object sender, EventArgs e)

@@ -38,28 +38,59 @@ namespace Garlic
 
         private void button2_Click(object sender, EventArgs e)
         {
-            panelEnterDate.Visible = true;
-            TableConsignment.Visible = true;
-            labelStart.Visible = true;
-            dateTimePickerStart.Visible = true;
+            if(button2.Text== "Додати в сушку")
+            {
+                panelEnterDate.Visible = true;
+                TableConsignment.Visible = true;
+                labelStart.Visible = true;
+                dateTimePickerStart.Visible = true;
+
+                labelWeight.Visible = false;
+                textBoxWeight.Visible = false;
+                labelEnd.Visible = false;
+                dateTimePickerEnd.Visible = false;
+                button2.Text = "Підтвердити";
+            }
+            else
+            {
+                panelEnterDate.Visible = false;
+                TableConsignment.Visible = false;
+                labelStart.Visible = false;
+                dateTimePickerStart.Visible = false;
+                button2.Text = "Додати в сушку";
+                MessageBox.Show("Партія <none> відправлена на сушку");
+            }
             
-            labelWeight.Visible = false;
-            textBoxWeight.Visible = false;
-            labelEnd.Visible = false;
-            dateTimePickerEnd.Visible = false;
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            panelEnterDate.Visible = true;
-            TableConsignment.Visible = true;
-            labelStart.Visible = false;
-            dateTimePickerStart.Visible = false;
-            labelWeight.Visible = true;
-            textBoxWeight.Visible = true;
-            labelEnd.Visible = true;
-            dateTimePickerEnd.Visible = true;
+            if(button3.Text== "Забрати з сушку")
+            {
+                panelEnterDate.Visible = true;
+                TableConsignment.Visible = true;
+                labelStart.Visible = false;
+                dateTimePickerStart.Visible = false;
+                labelWeight.Visible = true;
+                textBoxWeight.Visible = true;
+                labelEnd.Visible = true;
+                dateTimePickerEnd.Visible = true;
+                button3.Text = "Підтвердити";
+
+            }
+            else
+            {
+                labelWeight.Visible = false;
+                textBoxWeight.Visible = false;
+                labelEnd.Visible = false;
+                dateTimePickerEnd.Visible = false;
+                panelEnterDate.Visible = false;
+                TableConsignment.Visible = false;
+                button3.Text = "Забрати з сушку";
+                MessageBox.Show("Партію <none> забрали з сушки");
+            }
+           
 
         }
     }
