@@ -14,6 +14,7 @@ namespace Garlic.Model
         private double area;
         private string process;
         private double weightConsignment;
+        private int codeGarlic;
 
         /// <summary>
         /// Номер партії
@@ -39,5 +40,25 @@ namespace Garlic.Model
         /// Вага партії
         /// </summary>
         public double WeightConsignment { get => weightConsignment; set => weightConsignment = value; }
+        /// <summary>
+        /// Код часнику
+        /// </summary>
+        public int CodeGarlic { get => codeGarlic; set => codeGarlic = value; }
+        public Consignment(string numberConsignment,
+                           DateTime dateCollection,
+                           DateTime dateReceiving,
+                           double area,
+                           string process,
+                           double weightConsignment,
+                           int codeGarlic)
+        {
+            this.numberConsignment = numberConsignment;
+            this.dateCollection = dateCollection;
+            this.dateReceiving = dateReceiving;
+            this.area = area;
+            this.process = process;
+            this.weightConsignment = weightConsignment;
+            this.codeGarlic = codeGarlic;
+        }
     }
 }

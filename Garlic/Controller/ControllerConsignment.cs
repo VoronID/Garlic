@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Garlic.Controller
+namespace Garlic
 {
     public class ControllerConsignment
     {
-        SQLFunction sQLFunction = new SQLFunction();     
+       // SQLFunction sQLFunction = new SQLFunction();     
         public Consignment ConsignmentClass { get; set; }
       
         ControllerConsignment(Consignment _consignment)

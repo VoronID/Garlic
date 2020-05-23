@@ -52,10 +52,14 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.dtPDate = new System.Windows.Forms.DateTimePicker();
+            this.labelDate = new System.Windows.Forms.Label();
             this.panelSearch.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSearch
@@ -69,7 +73,6 @@
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Size = new System.Drawing.Size(1026, 0);
             this.panelSearch.TabIndex = 0;
-            this.panelSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSearch_Paint);
             // 
             // textBox3
             // 
@@ -79,7 +82,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(441, 31);
             this.textBox3.TabIndex = 14;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label1
             // 
@@ -92,7 +94,6 @@
             this.label1.Size = new System.Drawing.Size(147, 24);
             this.label1.TabIndex = 13;
             this.label1.Text = "Номер партії";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -111,7 +112,6 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -175,10 +175,10 @@
             // panel5
             // 
             this.panel5.Controls.Add(this.TableConsignment);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(31, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(964, 569);
+            this.panel5.Size = new System.Drawing.Size(964, 486);
             this.panel5.TabIndex = 4;
             // 
             // TableConsignment
@@ -235,10 +235,11 @@
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             this.TableConsignment.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.TableConsignment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TableConsignment.Size = new System.Drawing.Size(964, 569);
+            this.TableConsignment.Size = new System.Drawing.Size(964, 486);
             this.TableConsignment.StandardTab = true;
             this.TableConsignment.TabIndex = 14;
             this.TableConsignment.Visible = false;
+            this.TableConsignment.DoubleClick += new System.EventHandler(this.TableConsignment_DoubleClick);
             // 
             // Column1
             // 
@@ -275,11 +276,46 @@
             this.Column7.HeaderText = "Тип";
             this.Column7.Name = "Column7";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.dtPDate);
+            this.panel1.Controls.Add(this.labelDate);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(31, 486);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(964, 83);
+            this.panel1.TabIndex = 5;
+            this.panel1.Visible = false;
+            // 
+            // dtPDate
+            // 
+            this.dtPDate.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dtPDate.Location = new System.Drawing.Point(499, 31);
+            this.dtPDate.Name = "dtPDate";
+            this.dtPDate.Size = new System.Drawing.Size(219, 31);
+            this.dtPDate.TabIndex = 98;
+            this.dtPDate.Visible = false;
+            // 
+            // labelDate
+            // 
+            this.labelDate.AutoEllipsis = true;
+            this.labelDate.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(129)))), ((int)(((byte)(130)))));
+            this.labelDate.Location = new System.Drawing.Point(243, 20);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(250, 47);
+            this.labelDate.TabIndex = 97;
+            this.labelDate.Text = "Дата калібровки";
+            this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelDate.Visible = false;
+            // 
             // Calibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 640);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -288,11 +324,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Calibration";
             this.Text = "NewConsignment";
+            this.Load += new System.EventHandler(this.Calibration_Load);
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -317,5 +355,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker dtPDate;
+        private System.Windows.Forms.Label labelDate;
     }
 }

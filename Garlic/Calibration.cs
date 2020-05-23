@@ -12,6 +12,7 @@ namespace Garlic
 {
     public partial class Calibration : Form
     {
+        string CodeConsignment;
         public Calibration()
         {
             InitializeComponent();
@@ -23,12 +24,22 @@ namespace Garlic
             {
                 button2.Text = "Підтвердити";
                 TableConsignment.Visible = true;
+                labelDate.Visible = true;
+                dtPDate.Visible = true;
+                panel1.Visible = true;
+
             }  
             else
             {
-                button2.Text = "Відправити партію";
-                TableConsignment.Visible = false;
-                MessageBox.Show("Партія <none> відправлена на калібровку");
+                if(CodeConsignment!=null)
+                {
+                    button2.Text = "Відправити партію";
+                    TableConsignment.Visible = false;
+                    panel1.Visible = false;
+                    Main.sQLFunction.InsertInCalibration(CodeConsignment, Convert.ToDateTime(dtPDate.Value.ToShortDateString()));
+                    MessageBox.Show("Партія:"+CodeConsignment+". Відправлена на калібровку");
+                }
+              
             }
               
         }
@@ -47,24 +58,15 @@ namespace Garlic
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Calibration_Load(object sender, EventArgs e)
         {
-
+            Main.sQLFunction.LoadConsignmentInProcess(TableConsignment, "after drying");
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void TableConsignment_DoubleClick(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelSearch_Paint(object sender, PaintEventArgs e)
-        {
-
+            CodeConsignment = TableConsignment.SelectedRows[0].Cells[0].Value.ToString();
+            MessageBox.Show("Вибрано партію:" + CodeConsignment);
         }
     }
 }

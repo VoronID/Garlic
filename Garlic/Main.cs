@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Garlic.SQL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,7 @@ namespace Garlic
         {
             InitializeComponent();
         }
+        static public SQLFunction sQLFunction;
         List<string> nameButton = new List<string>() { "Часник", "      Приймання на склад", "Сушка", "   Калібрування", "   Нова партія", "    Холодильник", "       Контрольне зважування", "      Продаж та списання", "   Мапа" };
         /// <summary>
         /// Збільшення шрифту
@@ -192,6 +194,7 @@ namespace Garlic
         private void btnGarlic_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ЧАСНИК";
+            OpenlyFormInPanel(new Garlic());
         }
 
         private void btnWarehouse_Click(object sender, EventArgs e)
@@ -200,10 +203,10 @@ namespace Garlic
             OpenlyFormInPanel(new Storage());
         }
 
-        private void btnDrying_Click(object sender, EventArgs e)
+        public void btnDrying_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "СУШКА";
-            OpenlyFormInPanel(new Drying());
+            OpenlyFormInPanel(new ControllerDrying(this));
         }
 
         private void btnCaliber_Click(object sender, EventArgs e)
@@ -212,10 +215,10 @@ namespace Garlic
             OpenlyFormInPanel(new Calibration());
         }
 
-        private void btnNewConsignment_Click(object sender, EventArgs e)
+        public void btnNewConsignment_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "НОВА ПАРТІЯ";
-            OpenlyFormInPanel(new NewConsignment());
+            OpenlyFormInPanel(new NewConsignment(this));
         }
 
         private void btnRefrigerator_Click(object sender, EventArgs e)
@@ -224,20 +227,66 @@ namespace Garlic
             OpenlyFormInPanel(new Refrigerator());
         }
 
-        private void btnWeighing_Click(object sender, EventArgs e)
+        public void btnWeighing_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "КОНТРОЛЬНЕ ЗВАЖУВАННЯ";
+            OpenlyFormInPanel(new Control_Weighing(this));
+            //Graphs graphs = new Graphs();
+            //graphs.ShowDialog();
         }
 
         private void btnSelling_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ПРОДАЖ ТА СПИСАННЯ";
+            OpenlyFormInPanel(new SellWriteOff());
         }
 
         private void btnMap_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "МАПА";
+            OpenlyFormInPanel(new Mapa("Mapa"));
         }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+             sQLFunction = new SQLFunction();
+           
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        //private void panelAdd_MouseEnter(object sender, EventArgs e)
+        //{
+        //    labelAdd.Font = new Font("Century Gothic", 40F, FontStyle.Regular,
+        //              GraphicsUnit.Point, ((byte)(204)));
+        //    panelAdd.BackColor=Color.FromArgb(253, 251, 253);
+            
+        //}
+
+        //private void panelAdd_MouseLeave(object sender, EventArgs e)
+        //{
+        //    labelAdd.Font = new Font("Century Gothic", 36F, FontStyle.Regular,
+        //              GraphicsUnit.Point, ((byte)(204)));
+        //    panelAdd.BackColor = SystemColors.Control;
+            
+        //}
+
+        //private void panelSearch_MouseEnter(object sender, EventArgs e)
+        //{
+        //    labelSearch.Font = new Font("Century Gothic", 40F, FontStyle.Regular,
+        //             GraphicsUnit.Point, ((byte)(204)));
+        //    panelSearch.BackColor = Color.FromArgb(253, 251, 253);
+        //}
+
+        //private void panelSearch_MouseLeave(object sender, EventArgs e)
+        //{
+        //    labelSearch.Font = new Font("Century Gothic", 36F, FontStyle.Regular,
+        //              GraphicsUnit.Point, ((byte)(204)));
+        //    panelSearch.BackColor = SystemColors.Control;
+        //}
     }
 }
     
