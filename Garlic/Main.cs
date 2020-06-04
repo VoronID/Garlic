@@ -235,10 +235,10 @@ namespace Garlic
             //graphs.ShowDialog();
         }
 
-        private void btnSelling_Click(object sender, EventArgs e)
+        public void btnSelling_Click(object sender, EventArgs e)
         {
-            labelNavigation.Text = "ПРОДАЖ ТА СПИСАННЯ";
-            OpenlyFormInPanel(new SellWriteOff());
+            labelNavigation.Text = "ПРОДАЖ";
+            OpenlyFormInPanel(new Sell(this));
         }
 
         private void btnMap_Click(object sender, EventArgs e)
@@ -250,7 +250,9 @@ namespace Garlic
         private void Main_Load(object sender, EventArgs e)
         {
              sQLFunction = new SQLFunction();
-           
+            this.Hide();
+            Authorization authorization = new Authorization(this);
+            authorization.ShowDialog();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -258,12 +260,24 @@ namespace Garlic
             Close();
         }
 
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            labelNavigation.Text = "ЗВІТИ";
+            OpenlyFormInPanel(new Reports());
+        }
+
+        public void button1_Click(object sender, EventArgs e)
+        {
+            labelNavigation.Text = "СПИСАННЯ";
+            OpenlyFormInPanel(new WriteOff(this));
+        }
+
         //private void panelAdd_MouseEnter(object sender, EventArgs e)
         //{
         //    labelAdd.Font = new Font("Century Gothic", 40F, FontStyle.Regular,
         //              GraphicsUnit.Point, ((byte)(204)));
         //    panelAdd.BackColor=Color.FromArgb(253, 251, 253);
-            
+
         //}
 
         //private void panelAdd_MouseLeave(object sender, EventArgs e)
@@ -271,7 +285,7 @@ namespace Garlic
         //    labelAdd.Font = new Font("Century Gothic", 36F, FontStyle.Regular,
         //              GraphicsUnit.Point, ((byte)(204)));
         //    panelAdd.BackColor = SystemColors.Control;
-            
+
         //}
 
         //private void panelSearch_MouseEnter(object sender, EventArgs e)

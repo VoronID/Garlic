@@ -76,9 +76,6 @@ namespace Garlic
                 Graphs.weight = weight;
                 Graphs.codeNumber = control_Weighing.CodeNumber;
                 OpenlyFormInPanel(new Graphs());
-                
-
-
             }
 
 
@@ -130,6 +127,8 @@ namespace Garlic
             panelButton.Height = 0;
             process = "Search";
             OpenlyFormInPanel(new Mapa("Weight", this));
+            panelDate.Visible = false;
+            panelButton.Visible = false;
         }
         
 

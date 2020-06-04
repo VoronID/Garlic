@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnMap = new System.Windows.Forms.Button();
+            this.btnWriteOff = new System.Windows.Forms.Button();
             this.btnSelling = new System.Windows.Forms.Button();
             this.btnWeighing = new System.Windows.Forms.Button();
             this.btnRefrigerator = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelNavigation = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.btnReport = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -60,8 +60,8 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.panelMenu.Controls.Add(this.btnReport);
             this.panelMenu.Controls.Add(this.btnMap);
+            this.panelMenu.Controls.Add(this.btnWriteOff);
             this.panelMenu.Controls.Add(this.btnSelling);
             this.panelMenu.Controls.Add(this.btnWeighing);
             this.panelMenu.Controls.Add(this.btnRefrigerator);
@@ -87,16 +87,32 @@
             this.btnMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
             this.btnMap.Image = ((System.Drawing.Image)(resources.GetObject("btnMap.Image")));
             this.btnMap.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMap.Location = new System.Drawing.Point(0, 530);
+            this.btnMap.Location = new System.Drawing.Point(0, 580);
             this.btnMap.Name = "btnMap";
             this.btnMap.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnMap.Size = new System.Drawing.Size(254, 50);
-            this.btnMap.TabIndex = 43;
+            this.btnMap.TabIndex = 47;
             this.btnMap.Text = "   Мапа";
             this.btnMap.UseVisualStyleBackColor = true;
             this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
-            this.btnMap.MouseEnter += new System.EventHandler(this.btnMap_MouseEnter);
-            this.btnMap.MouseLeave += new System.EventHandler(this.btnMap_MouseLeave);
+            // 
+            // btnWriteOff
+            // 
+            this.btnWriteOff.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnWriteOff.FlatAppearance.BorderSize = 0;
+            this.btnWriteOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWriteOff.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.btnWriteOff.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
+            this.btnWriteOff.Image = ((System.Drawing.Image)(resources.GetObject("btnWriteOff.Image")));
+            this.btnWriteOff.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnWriteOff.Location = new System.Drawing.Point(0, 530);
+            this.btnWriteOff.Name = "btnWriteOff";
+            this.btnWriteOff.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.btnWriteOff.Size = new System.Drawing.Size(254, 50);
+            this.btnWriteOff.TabIndex = 43;
+            this.btnWriteOff.Text = "   Списання";
+            this.btnWriteOff.UseVisualStyleBackColor = true;
+            this.btnWriteOff.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnSelling
             // 
@@ -112,7 +128,7 @@
             this.btnSelling.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.btnSelling.Size = new System.Drawing.Size(254, 50);
             this.btnSelling.TabIndex = 42;
-            this.btnSelling.Text = "      Продаж та списання";
+            this.btnSelling.Text = "  Продаж";
             this.btnSelling.UseVisualStyleBackColor = true;
             this.btnSelling.Click += new System.EventHandler(this.btnSelling_Click);
             this.btnSelling.MouseEnter += new System.EventHandler(this.btnSelling_MouseEnter);
@@ -276,6 +292,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // panelLogo
@@ -340,23 +357,6 @@
             this.panelContent.Size = new System.Drawing.Size(1026, 640);
             this.panelContent.TabIndex = 34;
             // 
-            // btnReport
-            // 
-            this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnReport.FlatAppearance.BorderSize = 0;
-            this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.btnReport.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(253)))), ((int)(((byte)(255)))));
-            this.btnReport.Image = ((System.Drawing.Image)(resources.GetObject("btnReport.Image")));
-            this.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReport.Location = new System.Drawing.Point(0, 580);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.btnReport.Size = new System.Drawing.Size(254, 50);
-            this.btnReport.TabIndex = 44;
-            this.btnReport.Text = "   Звіти";
-            this.btnReport.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,7 +385,6 @@
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Panel panelTitleVar;
-        private System.Windows.Forms.Button btnMap;
         private System.Windows.Forms.Button btnSelling;
         private System.Windows.Forms.Button btnWeighing;
         private System.Windows.Forms.Button btnRefrigerator;
@@ -400,7 +399,8 @@
         private System.Windows.Forms.Label labelNavigation;
         private System.Windows.Forms.Panel panelContent;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btnMap;
+        private System.Windows.Forms.Button btnWriteOff;
     }
 }
 

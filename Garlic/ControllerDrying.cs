@@ -177,6 +177,7 @@ namespace Garlic
                 panelDate.Visible = false;
                 btnInsertConsignment.Visible = false;
                 btnTake.Visible = false;
+                pbReport.Visible = true;
                 
             }
             if(labelSearch.Text == "Друга сушка")
@@ -226,9 +227,7 @@ namespace Garlic
                         btnTake.Text = "Забрати";
                         MessageBox.Show("Партію:" + CodeConsignment + ". Забрано з мобільної сушки");
                     }
-
                 }
-               
             }
 
             if (labelNameProcess.Text == "Друга сушка")
@@ -274,6 +273,12 @@ namespace Garlic
         private void pictureBoxClose_Click(object sender, EventArgs e)
         {
             main.btnDrying_Click(this, null);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            ReportViwer reportViwer = new ReportViwer("Drying");
+            reportViwer.ShowDialog();
         }
     }
 }

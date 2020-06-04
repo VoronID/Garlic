@@ -35,7 +35,6 @@ namespace Garlic
 
         private void btnInsertConsignment_Click(object sender, EventArgs e)
         {
-            
             Consignment consignment = new Consignment(NumberConsignmentValue.Text, Convert.ToDateTime(dateTimePickerDateCollection.Value.ToShortDateString()), Convert.ToDateTime(dateTimePickerDateReceiving.Value.ToShortDateString()), Convert.ToDouble(AreaValue.Text), "storage", Convert.ToDouble(WeightConsignmentValue.Text), garlics.CodeGarlic);
             Main.sQLFunction.InsertConsignment(consignment);
             NumberConsignmentValue.Text = "";

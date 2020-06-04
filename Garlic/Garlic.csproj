@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>box.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
@@ -63,17 +66,15 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
-    <Reference Include="MindFusion.Charting, Version=4.1.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
-    <Reference Include="MindFusion.Charting.WinForms, Version=4.1.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
-    <Reference Include="MindFusion.Common, Version=1.3.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
-    <Reference Include="MindFusion.Licensing, Version=1.0.4.38034, Culture=neutral, PublicKeyToken=9d02e21d957ddaef" />
-    <Reference Include="MindFusion.Pdf, Version=1.3.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
-    <Reference Include="MindFusion.Svg, Version=1.2.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
-    <Reference Include="MindFusion.UI.WinForms, Version=1.2.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -108,16 +109,31 @@
     <Compile Include="Control_Weighing.Designer.cs">
       <DependentUpon>Control_Weighing.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Garlic.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Garlic.Designer.cs">
       <DependentUpon>Garlic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GarlicFactoryDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarlicFactoryDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GarlicFactoryDBDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarlicFactoryDBDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GarlicFactoryDBDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarlicFactoryDBDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GarlicFactoryDBDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GarlicFactoryDBDataSet3.xsd</DependentUpon>
     </Compile>
     <Compile Include="Graphs.cs">
       <SubType>Form</SubType>
@@ -151,6 +167,8 @@
       <DependentUpon>Calibration.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\RefrigeratorClass.cs" />
+    <Compile Include="Model\SellClass.cs" />
+    <Compile Include="Model\WriteOffClass.cs" />
     <Compile Include="NewConsignment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,20 +176,35 @@
       <DependentUpon>NewConsignment.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Refrigerator.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Refrigerator.Designer.cs">
       <DependentUpon>Refrigerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="SellWriteOff.cs">
+    <Compile Include="Reports.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SellWriteOff.Designer.cs">
-      <DependentUpon>SellWriteOff.cs</DependentUpon>
+    <Compile Include="Reports.Designer.cs">
+      <DependentUpon>Reports.cs</DependentUpon>
     </Compile>
-    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="ReportViwer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportViwer.Designer.cs">
+      <DependentUpon>ReportViwer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sell.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sell.Designer.cs">
+      <DependentUpon>Sell.cs</DependentUpon>
+    </Compile>
     <Compile Include="SQL\SQLFunction.cs" />
     <Compile Include="Storage.cs">
       <SubType>Form</SubType>
@@ -184,6 +217,12 @@
     </Compile>
     <Compile Include="ViewNewConsignment.Designer.cs">
       <DependentUpon>ViewNewConsignment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WriteOff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WriteOff.Designer.cs">
+      <DependentUpon>WriteOff.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Authorization.resx">
       <DependentUpon>Authorization.cs</DependentUpon>
@@ -224,9 +263,17 @@
     <EmbeddedResource Include="Refrigerator.resx">
       <DependentUpon>Refrigerator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporting\Report1.rdlc" />
-    <EmbeddedResource Include="SellWriteOff.resx">
-      <DependentUpon>SellWriteOff.cs</DependentUpon>
+    <EmbeddedResource Include="ReportDrying.rdlc" />
+    <EmbeddedResource Include="Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportSell.rdlc" />
+    <EmbeddedResource Include="ReportViwer.resx">
+      <DependentUpon>ReportViwer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportWriteOff.rdlc" />
+    <EmbeddedResource Include="Sell.resx">
+      <DependentUpon>Sell.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Storage.resx">
       <DependentUpon>Storage.cs</DependentUpon>
@@ -234,46 +281,68 @@
     <EmbeddedResource Include="ViewNewConsignment.resx">
       <DependentUpon>ViewNewConsignment.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <EmbeddedResource Include="WriteOff.resx">
+      <DependentUpon>WriteOff.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="GarlicFactoryDBDataSet.xsc">
+      <DependentUpon>GarlicFactoryDBDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
+    <None Include="GarlicFactoryDBDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>GarlicFactoryDBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <None Include="GarlicFactoryDBDataSet.xss">
+      <DependentUpon>GarlicFactoryDBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet1.xsc">
+      <DependentUpon>GarlicFactoryDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GarlicFactoryDBDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GarlicFactoryDBDataSet1.xss">
+      <DependentUpon>GarlicFactoryDBDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet2.xsc">
+      <DependentUpon>GarlicFactoryDBDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GarlicFactoryDBDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GarlicFactoryDBDataSet2.xss">
+      <DependentUpon>GarlicFactoryDBDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet3.xsc">
+      <DependentUpon>GarlicFactoryDBDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="GarlicFactoryDBDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GarlicFactoryDBDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GarlicFactoryDBDataSet3.xss">
+      <DependentUpon>GarlicFactoryDBDataSet3.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Garlic.Model.DryingInformation.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="box.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

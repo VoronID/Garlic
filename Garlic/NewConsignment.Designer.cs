@@ -207,7 +207,7 @@
             this.TableNewConsignment.AllowUserToDeleteRows = false;
             this.TableNewConsignment.AllowUserToResizeColumns = false;
             this.TableNewConsignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(233)))), ((int)(((byte)(130)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TableNewConsignment.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.TableNewConsignment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;

@@ -1,6 +1,7 @@
 ﻿using Garlic.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
@@ -24,14 +25,27 @@ namespace Garlic.SQL
             OpenFile();
             ConnectTo();
         }
+
+        public bool CheckUser(string userName,string password)
+        {
+            if(userName == "WorkerFactory")
+            {
+                if(password == "Garlic")
+                {
+                    return true;
+
+                }
+                return false;
+            }
+            return false;
+        }
+
         public SqlConnection ConnectTo()
         {
-            //Data Source=USER;Initial Catalog=User;Integrated Security=True
             connStringBuilder = new SqlConnectionStringBuilder();
             connStringBuilder.DataSource = DataSource;
             connStringBuilder.InitialCatalog = InitialCatalog;
             connStringBuilder.IntegratedSecurity = true;
-
             conn = new SqlConnection(connStringBuilder.ToString());
             return conn;
 
@@ -113,15 +127,10 @@ namespace Garlic.SQL
             string text = "";
             string User = "";
             string InitialCatalogs = "";
-          
-
                 using (FileStream fstream = File.OpenRead("DBConnectionString.txt"))
                 {
-                    // преобразуем строку в байты
                     byte[] array = new byte[fstream.Length];
-                    // считываем данные
                     fstream.Read(array, 0, array.Length);
-                    // декодируем байты в строку
                     textFromFile = System.Text.Encoding.Default.GetString(array);
                     Console.WriteLine($"Текст из файла: {textFromFile}");
                 }
@@ -129,33 +138,11 @@ namespace Garlic.SQL
                 bool twoWords = false;
                 for (int i = textFromFile.Length - 1; i != 0; i--)
                 {
-                    if (textFromFile[i] != '=')
-                    {
-                        if (oneWords != true)
-                        {
-                            User += textFromFile[i];
-                        }
-                    }
-                    else
-                    {
-                        oneWords = true;
-                    }
-                    if (textFromFile[i] == ';')
-                    {
-                        twoWords = true;
-                        continue;
-                    }
-                    if (twoWords == true)
-                    {
-                        if (textFromFile[i] == '=')
-                        {
-                            twoWords = false;
-                            break;
-                        }
-                        InitialCatalogs += textFromFile[i];
-                    }
+                    if (textFromFile[i] != '=') {if (oneWords != true) {User += textFromFile[i]; } }
+                    else {oneWords = true;}
+                    if (textFromFile[i] == ';') {twoWords = true;continue; }
+                    if (twoWords == true) {if (textFromFile[i] == '=') {twoWords = false;break; } InitialCatalogs += textFromFile[i]; }
                 }
-           
         DataSource = new string(User.Reverse().ToArray());
             InitialCatalog = new string(InitialCatalogs.Reverse().ToArray());
             
@@ -193,7 +180,7 @@ namespace Garlic.SQL
             Storey = Storey - 1;
             try
             {
-                string cmdText = "UPDATE dbo.Refrigerator SET Storey='" + Storey + "''where FK_Code_New_Consignment='" + codeConsignment + "';";
+                string cmdText = "UPDATE dbo.Refrigerator SET Storey='" + Storey + "' where FK_Code_New_Consignment='" + codeConsignment + "'";
                 SqlCommand cmd = new SqlCommand(cmdText, conn);
                 cmd.ExecuteNonQuery();
             }
@@ -212,69 +199,74 @@ namespace Garlic.SQL
 
         }
 
-        public void RelocationRefrigerator(RefrigeratorClass refrigeratorClass)
-        {
-           // DeleteRefrigerator(refrigeratorClass);
-            Dictionary<string, int> consignmentWhichAreAbove = new Dictionary<string, int>();
-            //LoadCountConsignmentInCell(refrigeratorClass, ref consignmentWhichAreAbove);
 
-            foreach (var pair in consignmentWhichAreAbove)
-            {
-                UpdateCellConsignment(pair.Key, pair.Value);
-            }
-               
-            
-           
-            
-        }
-
-        public void DeleteRefrigerator(RefrigeratorClass refrigeratorClass)
+        public void LoadConsignmentThatAreHigherLevel(RefrigeratorClass refrigeratorClass,ref Dictionary<string, int> InformConsignment)
         {
-            string sqlExpression = "sp_ViewConsignmentProcess";
+
             try
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand(sqlExpression, conn);
 
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                string query = "Select FK_Code_New_Consignment,Storey FROM Refrigerator WHERE Camera = '" + refrigeratorClass.Camera + "' and Column_Box = '" + refrigeratorClass.Column + "'and Rows_Box = '" + refrigeratorClass.Rows + "' and Storey > '" + refrigeratorClass.Storey + "'";
 
-                SqlParameter numberConsignment = new SqlParameter
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.HasRows)
                 {
-                    ParameterName = "@NumberConsignment",
-                    Value = refrigeratorClass.CodeNumber
-                };
-                command.Parameters.Add(numberConsignment);
-                SqlParameter camera = new SqlParameter
-                {
-                    ParameterName = "@Camera",
-                    Value = refrigeratorClass.Camera
-                };
-                command.Parameters.Add(camera);
-                SqlParameter column = new SqlParameter
-                {
-                    ParameterName = "@Column_Box",
-                    Value = refrigeratorClass.Column
-                };
-                command.Parameters.Add(column);
-                SqlParameter rows = new SqlParameter
-                {
-                    ParameterName = "@Rows_Box",
-                    Value = refrigeratorClass.Rows
-                };
-                command.Parameters.Add(rows);
+                    while (reader.Read())
+                    {
+                        InformConsignment[reader.GetValue(0).ToString()] = Convert.ToInt32(reader.GetValue(1));
 
-                SqlParameter storey = new SqlParameter
-                {
-                    ParameterName = "@Storey",
-                    Value = refrigeratorClass.Storey
-                };
-                command.Parameters.Add(storey);
+                    }
+                    reader.NextResult();
+                }
+                reader.Close();
+
 
             }
             catch (Exception)
             {
 
                 throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                  
+                }
+            }
+        }
+
+
+        public void RelocationRefrigerator(RefrigeratorClass refrigeratorClass)
+        {
+            DeleteRefrigerator(refrigeratorClass);
+            Dictionary<string, int> consignmentWhichAreAbove = new Dictionary<string, int>();
+            LoadConsignmentThatAreHigherLevel(refrigeratorClass, ref consignmentWhichAreAbove);
+
+            foreach (var pair in consignmentWhichAreAbove)
+            {
+                UpdateCellConsignment(pair.Key, pair.Value);
+            }
+ 
+        }
+
+        public void DeleteRefrigerator(RefrigeratorClass refrigeratorClass)
+        {
+            string sqlExpression = "Update Refrigerator SET Camera = null,Column_Box = null,Rows_Box = null,Storey = null WHERE FK_Code_New_Consignment = '"+refrigeratorClass.CodeNumber+"' AND Camera = '"+ refrigeratorClass.Camera+ "' AND Column_Box = '"+ refrigeratorClass .Column+ "' AND Rows_Box = '"+ refrigeratorClass.Rows+ "' AND Storey = '"+ refrigeratorClass.Storey + "'";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlExpression, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+         
             }
             finally
             {
@@ -365,6 +357,232 @@ namespace Garlic.SQL
 
             foreach (string[] s in data)
                 dataGridView.Rows.Add(s);
+        }
+
+        public void SearchConsignmentSellBtDate(DataGridView dataGridView, DateTime From,DateTime To)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT New_Consignment.Code_New_Consignment ,New_Consignment.Date_Creation ,New_Consignment.Weight_New_Consignment ,New_Consignment.Caliber ,GARLIC.Name_Garlic ,GARLIC.Sort_Garlic ,Sell.Date_Operation_Sell , Sell.Price ,Sell.Total_Price FROM New_Consignment JOIN GARLIC ON New_Consignment.FK_Garlic_NewConsignment = GARLIC.Code_Garlic JOIN Sell ON New_Consignment.Code_New_Consignment = Sell.Number_Consignment Where  Sell.Date_Operation_Sell>='"+From+ "' AND Sell.Date_Operation_Sell<='"+To+"'";
+
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlDataReader reader = command.ExecuteReader();
+                List<string[]> data = new List<string[]>();
+                while (reader.Read())
+                {
+                    data.Add(new string[9]);
+                    data[data.Count - 1][0] = reader[0].ToString();
+                    data[data.Count - 1][1] = (Convert.ToDateTime(reader[1]).ToShortDateString()).ToString();
+                    data[data.Count - 1][2] = reader[2].ToString();
+                    data[data.Count - 1][3] = reader[3].ToString();
+                    data[data.Count - 1][4] = reader[4].ToString();
+                    data[data.Count - 1][5] = reader[5].ToString();
+                    data[data.Count - 1][6] = (Convert.ToDateTime(reader[6]).ToShortDateString()).ToString();
+                    data[data.Count - 1][7] = Math.Round(Convert.ToDouble(reader[7]), 2).ToString();
+                    data[data.Count - 1][8] = Math.Round(Convert.ToDouble(reader[8]), 2).ToString();
+                }
+                reader.Close();
+                foreach (string[] s in data)
+                    dataGridView.Rows.Add(s);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+
+                }
+            }
+        }
+
+        public DataTable GetDataDrying()
+        {
+            string sqlExpression = "sp_GetOrderDryingReport";
+            DataTable dataTable = new DataTable();
+            conn.Open();
+            SqlCommand command = new SqlCommand(sqlExpression, conn);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            var result = command.ExecuteNonQuery();
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(dataTable);
+            conn.Close();
+            return dataTable;
+        }
+
+
+        public DataTable GetDataSell(DateTime From,DateTime To)
+        {
+            string sqlExpression = "sp_GetOrderSellReport";
+            DataTable dataTable = new DataTable();
+            conn.Open();
+            SqlCommand command = new SqlCommand(sqlExpression, conn);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlParameter FromParametrs = new SqlParameter
+            {
+                ParameterName = "@FromDate",
+                Value = From
+            };
+            command.Parameters.Add(FromParametrs);
+
+            SqlParameter ToParametrs = new SqlParameter
+            {
+                ParameterName = "@ToDate",
+                Value = To
+            };
+            command.Parameters.Add(ToParametrs);
+            var result = command.ExecuteNonQuery();
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(dataTable);
+            conn.Close();
+            return dataTable;
+       
+        }
+        public DataTable GetDataWriteOff(DateTime From, DateTime To)
+        {
+            string sqlExpression = "sp_GetOrderWriteReport";
+            DataTable dataTable = new DataTable();
+            conn.Open();
+            SqlCommand command = new SqlCommand(sqlExpression, conn);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlParameter FromParametrs = new SqlParameter
+            {
+                ParameterName = "@FromDate",
+                Value = From
+            };
+            command.Parameters.Add(FromParametrs);
+
+            SqlParameter ToParametrs = new SqlParameter
+            {
+                ParameterName = "@ToDate",
+                Value = To
+            };
+            command.Parameters.Add(ToParametrs);
+            var result = command.ExecuteNonQuery();
+            SqlDataAdapter adp = new SqlDataAdapter(command);
+            adp.Fill(dataTable);
+            conn.Close();
+            return dataTable;
+
+        }
+
+        public void SearchConsignmentWriteOffByDate(DataGridView dataGridView, DateTime From,DateTime To)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT New_Consignment.Code_New_Consignment ,New_Consignment.Date_Creation ,New_Consignment.Caliber ,GARLIC.Name_Garlic ,GARLIC.Sort_Garlic ,Write_Off.Date_Operation_Write_Off,New_Consignment.Weight_New_Consignment  FROM New_Consignment JOIN GARLIC ON New_Consignment.FK_Garlic_NewConsignment = GARLIC.Code_Garlic JOIN Write_Off ON New_Consignment.Code_New_Consignment = Write_Off.Number_Consignment_Write_Off Where Write_Off.Date_Operation_Write_Off>='" + From+ "' AND Write_Off.Date_Operation_Write_Off<='" + To+"'";
+
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlDataReader reader = command.ExecuteReader();
+                List<string[]> data = new List<string[]>();
+                while (reader.Read())
+                {
+                    data.Add(new string[9]);
+                    data[data.Count - 1][0] = reader[0].ToString();
+                    data[data.Count - 1][1] = (Convert.ToDateTime(reader[1]).ToShortDateString()).ToString();
+                    data[data.Count - 1][2] = reader[2].ToString();
+                    data[data.Count - 1][3] = reader[3].ToString();
+                    data[data.Count - 1][4] = reader[4].ToString();
+                    data[data.Count - 1][5] = (Convert.ToDateTime(reader[5]).ToShortDateString()).ToString();
+                    data[data.Count - 1][6] = reader[6].ToString();
+
+                }
+                reader.Close();
+                foreach (string[] s in data)
+                    dataGridView.Rows.Add(s);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+
+                }
+            }
+        }
+
+        public void LoadConsignmentWriteOff(DataGridView dataGridView)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = "SELECT New_Consignment.Code_New_Consignment ,New_Consignment.Date_Creation ,New_Consignment.Weight_New_Consignment ,New_Consignment.Caliber ,GARLIC.Name_Garlic ,GARLIC.Sort_Garlic ,Write_Off.Date_Operation_Write_Off FROM New_Consignment JOIN GARLIC ON New_Consignment.FK_Garlic_NewConsignment = GARLIC.Code_Garlic JOIN Write_Off ON New_Consignment.Code_New_Consignment = Write_Off.Number_Consignment_Write_Off";
+
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlDataReader reader = command.ExecuteReader();
+                List<string[]> data = new List<string[]>();
+                while (reader.Read())
+                {
+                    data.Add(new string[9]);
+                    data[data.Count - 1][0] = reader[0].ToString();
+                    data[data.Count - 1][1] = (Convert.ToDateTime(reader[1]).ToShortDateString()).ToString();
+                    data[data.Count - 1][2] = reader[2].ToString();
+                    data[data.Count - 1][3] = reader[3].ToString();
+                    data[data.Count - 1][4] = reader[4].ToString();
+                    data[data.Count - 1][5] = reader[5].ToString();
+                    data[data.Count - 1][6] = (Convert.ToDateTime(reader[6]).ToShortDateString()).ToString();
+         
+                }
+                reader.Close();
+                foreach (string[] s in data)
+                    dataGridView.Rows.Add(s);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+
+                }
+            }
+        }
+
+
+        public void LoadConsignmentSell(DataGridView dataGridView)
+        {
+            conn.Open();
+            string query = "SELECT* FROM Party_information_Sell";
+            SqlCommand command = new SqlCommand(query, conn);
+            SqlDataReader reader = command.ExecuteReader();
+            List<string[]> data = new List<string[]>();
+            while (reader.Read())
+            {
+                data.Add(new string[9]);
+                data[data.Count - 1][0] = reader[0].ToString();
+                data[data.Count - 1][1] = (Convert.ToDateTime(reader[1]).ToShortDateString()).ToString();
+                data[data.Count - 1][2] = reader[2].ToString();
+                data[data.Count - 1][3] = reader[3].ToString();
+                data[data.Count - 1][4] = reader[4].ToString();
+                data[data.Count - 1][5] = reader[5].ToString();
+                data[data.Count - 1][6] = (Convert.ToDateTime(reader[6]).ToShortDateString()).ToString();
+                data[data.Count - 1][7] = Math.Round(Convert.ToDouble(reader[7]),2).ToString();
+                data[data.Count - 1][8] = Math.Round(Convert.ToDouble(reader[8]), 2).ToString();
+            }
+            reader.Close();
+            conn.Close();
+
+            foreach (string[] s in data)
+                dataGridView.Rows.Add(s);
+
         }
 
 
@@ -529,41 +747,78 @@ namespace Garlic.SQL
                 }
             }
         }
+        public void LoadDataConsignmentInCell(RefrigeratorClass refrigeratorClass, ref WriteOffClass sellClass)
+        {
+            try
+            {
+                conn.Open();
 
-        //public void LoadConsignmentInCell(RefrigeratorClass refrigeratorClass, ref Dictionary<string, int> vs)
-        //{
-        //    try
-        //    {
-        //        conn.Open();
+                string query = "Select FK_Code_New_Consignment,Code_Refrigerator FROM Refrigerator WHERE Camera = '" + refrigeratorClass.Camera + "' and Column_Box = '" + refrigeratorClass.Column + "'and Rows_Box = '" + refrigeratorClass.Rows + "' and Storey='" + refrigeratorClass.Storey + "'";
 
-        //        string query = "Select FK_Code_New_Consignment,Storey FROM Refrigerator WHERE Camera = '" + refrigeratorClass.Camera + "' and Column_Box = '" + refrigeratorClass.Column + "'and Rows_Box = " + refrigeratorClass.Rows + " and Storey>'" + refrigeratorClass.Storey + "'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
 
-        //        SqlCommand cmd = new SqlCommand(query, conn);
-        //        SqlDataReader reader = cmd.ExecuteReader();
-        //        while (reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                vs[reader.GetValue(0).ToString()] = Convert.ToInt32(reader.GetValue(1));
-        //            }
-        //            reader.NextResult();
-        //        }
-        //        reader.Close();
+                while (reader.Read())
+                {
+                    sellClass.NumberConsignment = reader.GetValue(0).ToString();
+                    sellClass.CodeRefrigerator = Convert.ToInt32(reader.GetValue(1));
+                }
+                reader.NextResult();
 
-        //    }
-        //    catch (Exception)
-        //    {
+                reader.Close();
 
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        if (conn != null)
-        //        {
-        //            conn.Close();
-        //        }
-        //    }
-        //}
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                    
+                }
+            }
+        }
+        public void LoadDataConsignmentInCell(RefrigeratorClass refrigeratorClass, ref SellClass sellClass)
+        {
+            try
+            {
+                conn.Open();
+
+                string query = "Select FK_Code_New_Consignment,Code_Refrigerator FROM Refrigerator WHERE Camera = '" + refrigeratorClass.Camera + "' and Column_Box = '" + refrigeratorClass.Column + "'and Rows_Box = '" + refrigeratorClass.Rows + "' and Storey='" + refrigeratorClass.Storey + "'";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        sellClass.NumberConsignment=reader.GetValue(0).ToString();
+                        sellClass.CodeRefrigerator = Convert.ToInt32(reader.GetValue(1));
+                    }
+                    reader.NextResult();
+              
+                reader.Close();
+               
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                    sellClass.Weight = LoadWeightNewConsignment(sellClass.NumberConsignment);
+                }
+            }
+        }
 
 
         public void LoadConsignmentInCell(RefrigeratorClass refrigeratorClass,ref List<string> vs)
@@ -815,6 +1070,123 @@ namespace Garlic.SQL
             
         }
 
+
+        public void InsertWriteOff(WriteOffClass writeOffClass)
+        {
+
+            string sqlExpression = "sp_InsertWriteOff";
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, conn);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlParameter Date = new SqlParameter
+                {
+                    ParameterName = "@Date_Operation__Write_Off",
+                    Value = writeOffClass.DateOperation
+                };
+                command.Parameters.Add(Date);
+
+                SqlParameter NumberConsignment = new SqlParameter
+                {
+                    ParameterName = "@Number_Consignment",
+                    Value = writeOffClass.NumberConsignment
+                };
+                command.Parameters.Add(NumberConsignment);
+
+                SqlParameter CodeRefrigerator = new SqlParameter
+                {
+                    ParameterName = "@FK_Code_Refrigerator",
+                    Value = writeOffClass.CodeRefrigerator
+                };
+                command.Parameters.Add(CodeRefrigerator);
+
+
+                var result = command.ExecuteNonQuery();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    MessageBox.Show("Партію ");
+                    conn.Close();
+                }
+            }
+
+        }
+
+        public void InsertSell(SellClass sellClass)
+        {
+
+            string sqlExpression = "sp_InsertSell";
+            try
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, conn);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlParameter Date = new SqlParameter
+                {
+                    ParameterName = "@Date_Operation_Sell",
+                    Value = sellClass.DateOperation
+                };
+                command.Parameters.Add(Date);
+
+                SqlParameter Price = new SqlParameter
+                {
+                    ParameterName = "@Price",
+                    Value = sellClass.Price
+                };
+                command.Parameters.Add(Price);
+
+                SqlParameter TotalPrice = new SqlParameter
+                {
+                    ParameterName = "@Total_Price",
+                    Value = sellClass.TotalPrice
+                };
+                command.Parameters.Add(TotalPrice);
+
+                SqlParameter NumberConsignment = new SqlParameter
+                {
+                    ParameterName = "@Number_Consignment",
+                    Value = sellClass.NumberConsignment
+                };
+                command.Parameters.Add(NumberConsignment);
+
+                SqlParameter CodeRefrigerator = new SqlParameter
+                {
+                    ParameterName = "@FK_Code_Refrigerator",
+                    Value = sellClass.CodeRefrigerator
+                };
+                command.Parameters.Add(CodeRefrigerator);
+
+             
+                var result = command.ExecuteNonQuery();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    MessageBox.Show("Партію продано");
+                    conn.Close();
+                }
+            }
+       
+        }
+
         public void InsertInRefrigerator(string camera, string column, int rows, int storey, DateTime date, string numberConsignment)
         {
             string sqlExpression = "sp_InsertInRefrigerator";
@@ -865,7 +1237,6 @@ namespace Garlic.SQL
                 };
                 command.Parameters.Add(FK_Code_New_Consignment);
                 var result = command.ExecuteNonQuery();
-
 
             }
             catch (Exception)
@@ -1081,6 +1452,7 @@ namespace Garlic.SQL
                 }
             }
         }
+
         public void InsertConsignment(Consignment consignment)
             {
             string sqlExpression = "sp_InsertConsignment";
@@ -1095,35 +1467,30 @@ namespace Garlic.SQL
                     Value = consignment.NumberConsignment
                 };
                 command.Parameters.Add(numberConsignmentParam);
-
                 SqlParameter dateCollectionParam = new SqlParameter
                 {
                     ParameterName = "@Date_Collection",
                     Value = consignment.DateCollection
                 };
                 command.Parameters.Add(dateCollectionParam);
-
                 SqlParameter dateReceivingParam = new SqlParameter
                 {
                     ParameterName = "@Date_Receiving",
                     Value = consignment.DateReceiving
                 };
                 command.Parameters.Add(dateReceivingParam);
-
                 SqlParameter areaParam = new SqlParameter
                 {
                     ParameterName = "@Area",
                     Value = consignment.Area
                 };
                 command.Parameters.Add(areaParam);
-
                 SqlParameter processParam = new SqlParameter
                 {
                     ParameterName = "@Process",
                     Value = consignment.Process
                 };
                 command.Parameters.Add(processParam);
-
                 SqlParameter weightConsignmentParam = new SqlParameter
                 {
                     ParameterName = "@WeightConsignment",
@@ -1139,7 +1506,6 @@ namespace Garlic.SQL
                 command.Parameters.Add(FKGarlicParam);
                 var result = command.ExecuteNonQuery();
                 MessageBox.Show("Партію:"+consignment.NumberConsignment+".Додано.");
-                
             }
             catch (Exception)
                 {

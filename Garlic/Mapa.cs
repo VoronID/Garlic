@@ -13,8 +13,12 @@ namespace Garlic
 {
     public partial class Mapa : Form
     {
+        SellClass sell = new SellClass();
+        WriteOffClass WriteOffClass = new WriteOffClass();
         Control_Weighing Control_Weighing;
         RefrigeratorClass refrigerator;
+        WriteOff WriteOff;
+        Sell Sell;
         List<string> numberConsignment = new List<string>(6);
         Model.NewConsignment NewConsignment = new Model.NewConsignment();
          string column;
@@ -35,6 +39,19 @@ namespace Garlic
             Form = form;
         }
 
+        public Mapa(string form,WriteOff writeOff)
+        {
+            InitializeComponent();
+            WriteOff = writeOff;
+            Form = form;
+        }
+
+        public Mapa(string form,Sell sell)
+        {
+            InitializeComponent();
+            Sell = sell;
+            Form = form;
+        }
         private void Mapa_Load(object sender, EventArgs e)
         {
             LoadCountConsignment();
@@ -48,11 +65,7 @@ namespace Garlic
                 if (previousBtn.GetType() == typeof(Button))
                 {
                     CalculationBox((Button)previousBtn);
-
                     previousBtn.Text = Main.sQLFunction.LoadCountConsignmentInCell(refrigerator).ToString();
-                       
-
-                   
                 }
                
             }
@@ -303,6 +316,7 @@ void CalculationBox(Button panel)
 
         private void panel_Click(object sender, EventArgs e)
         {
+
             int count;
             ClearButton();
             CalculationBoxs((Button)sender);
@@ -345,6 +359,14 @@ void CalculationBox(Button panel)
             {
                 EnableButton();
             }
+            if(Form=="Sell")
+            {
+                EnableButton();
+            }
+            if(Form=="Write-Off")
+            {
+                EnableButton();
+            }
             
         }
 
@@ -372,7 +394,6 @@ void CalculationBox(Button panel)
             }
             if(Form== "Refregerator")
             {
-                
                 switch(GetNameButton((Button)sender))
                 {
                     case "btnConsignment1": { refrigerator.Storey = 1; break; }
@@ -402,7 +423,39 @@ void CalculationBox(Button panel)
                 Control_Weighing.AddRecord();
                 Close();
             }
-          
+            if (Form == "Sell")
+            {
+                switch (GetNameButton((Button)sender))
+                {
+                    case "btnConsignment1": { refrigerator.Storey = 1; refrigerator.CodeNumber = btnConsignment1.Text; break; }
+                    case "btnConsignment2": { refrigerator.Storey = 2; refrigerator.CodeNumber = btnConsignment2.Text; break; }
+                    case "btnConsignment3": { refrigerator.Storey = 3; refrigerator.CodeNumber = btnConsignment3.Text; break; }
+                    case "btnConsignment4": { refrigerator.Storey = 4; refrigerator.CodeNumber = btnConsignment4.Text; break; }
+                    case "btnConsignment5": { refrigerator.Storey = 5; refrigerator.CodeNumber = btnConsignment5.Text; break; }
+                    case "btnConsignment6": { refrigerator.Storey = 6; refrigerator.CodeNumber = btnConsignment6.Text; break; }
+                }
+                Main.sQLFunction.LoadDataConsignmentInCell(refrigerator,ref sell);
+                Sell.SellClass = sell;
+                Sell.refrigeratorClass = refrigerator;
+                Sell.AddInterface();
+            }
+            if(Form == "Write-Off")
+            {
+                switch (GetNameButton((Button)sender))
+                {
+                    case "btnConsignment1": { refrigerator.Storey = 1; refrigerator.CodeNumber = btnConsignment1.Text; break; }
+                    case "btnConsignment2": { refrigerator.Storey = 2; refrigerator.CodeNumber = btnConsignment2.Text; break; }
+                    case "btnConsignment3": { refrigerator.Storey = 3; refrigerator.CodeNumber = btnConsignment3.Text; break; }
+                    case "btnConsignment4": { refrigerator.Storey = 4; refrigerator.CodeNumber = btnConsignment4.Text; break; }
+                    case "btnConsignment5": { refrigerator.Storey = 5; refrigerator.CodeNumber = btnConsignment5.Text; break; }
+                    case "btnConsignment6": { refrigerator.Storey = 6; refrigerator.CodeNumber = btnConsignment6.Text; break; }
+                }
+                Main.sQLFunction.LoadDataConsignmentInCell(refrigerator, ref WriteOffClass);
+                WriteOff.WriteOffClass = WriteOffClass;
+                WriteOff.NewConsignment = Main.sQLFunction.SearchConsignment((Button)sender);
+                WriteOff.refrigeratorClass = refrigerator;
+                WriteOff.AddInterface();
+            }
 
 
         }

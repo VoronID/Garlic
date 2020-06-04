@@ -79,6 +79,7 @@ namespace Garlic
             panelData.Height = 0;
             TableNewConsignment.Visible = true;
             btnInsert.Visible = false;
+            Main.sQLFunction.LoadNewConsignment(TableNewConsignment);
         }
 
         private void label1_Click(object sender, EventArgs e)

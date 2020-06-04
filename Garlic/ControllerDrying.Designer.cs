@@ -47,7 +47,7 @@
             this.labelSearch = new System.Windows.Forms.Label();
             this.pictureBoxClose = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.pbReport = new System.Windows.Forms.PictureBox();
             this.btnTake = new System.Windows.Forms.Button();
             this.btnInsertConsignment = new System.Windows.Forms.Button();
             this.panelDate = new System.Windows.Forms.Panel();
@@ -88,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbReport)).BeginInit();
             this.panelDate.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -103,7 +104,7 @@
             this.panelAdds.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelAdds.Location = new System.Drawing.Point(0, 0);
             this.panelAdds.Name = "panelAdds";
-            this.panelAdds.Size = new System.Drawing.Size(10, 640);
+            this.panelAdds.Size = new System.Drawing.Size(513, 640);
             this.panelAdds.TabIndex = 20;
             this.panelAdds.Click += new System.EventHandler(this.panelAdds_Click);
             this.panelAdds.MouseEnter += new System.EventHandler(this.panelAdds_MouseEnter);
@@ -133,9 +134,9 @@
             this.panelSearchs.Controls.Add(this.pictureBox2);
             this.panelSearchs.Controls.Add(this.labelSearch);
             this.panelSearchs.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSearchs.Location = new System.Drawing.Point(1016, 0);
+            this.panelSearchs.Location = new System.Drawing.Point(513, 0);
             this.panelSearchs.Name = "panelSearchs";
-            this.panelSearchs.Size = new System.Drawing.Size(10, 640);
+            this.panelSearchs.Size = new System.Drawing.Size(513, 640);
             this.panelSearchs.TabIndex = 21;
             this.panelSearchs.Click += new System.EventHandler(this.panelSearchs_Click);
             this.panelSearchs.MouseEnter += new System.EventHandler(this.panelSearchs_MouseEnter);
@@ -172,31 +173,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Controls.Add(this.pbReport);
             this.panel1.Controls.Add(this.btnTake);
             this.panel1.Controls.Add(this.btnInsertConsignment);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(10, 559);
+            this.panel1.Location = new System.Drawing.Point(513, 559);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1006, 81);
+            this.panel1.Size = new System.Drawing.Size(0, 81);
             this.panel1.TabIndex = 23;
             // 
-            // btnSearch
+            // pbReport
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(129)))), ((int)(((byte)(130)))));
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSearch.Location = new System.Drawing.Point(344, 15);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(297, 54);
-            this.btnSearch.TabIndex = 101;
-            this.btnSearch.Text = "Пошук";
-            this.btnSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.pbReport.Image = ((System.Drawing.Image)(resources.GetObject("pbReport.Image")));
+            this.pbReport.Location = new System.Drawing.Point(647, 26);
+            this.pbReport.Name = "pbReport";
+            this.pbReport.Size = new System.Drawing.Size(32, 32);
+            this.pbReport.TabIndex = 102;
+            this.pbReport.TabStop = false;
+            this.pbReport.Visible = false;
+            this.pbReport.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // btnTake
             // 
@@ -236,9 +231,9 @@
             this.panelDate.Controls.Add(this.dtPStart);
             this.panelDate.Controls.Add(this.labelStart);
             this.panelDate.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelDate.Location = new System.Drawing.Point(10, 458);
+            this.panelDate.Location = new System.Drawing.Point(513, 458);
             this.panelDate.Name = "panelDate";
-            this.panelDate.Size = new System.Drawing.Size(1006, 101);
+            this.panelDate.Size = new System.Drawing.Size(0, 101);
             this.panelDate.TabIndex = 24;
             // 
             // WeightValue
@@ -314,16 +309,16 @@
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Controls.Add(this.button2);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSearch.Location = new System.Drawing.Point(10, 0);
+            this.panelSearch.Location = new System.Drawing.Point(513, 0);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(1006, 0);
+            this.panelSearch.Size = new System.Drawing.Size(0, 0);
             this.panelSearch.TabIndex = 25;
             // 
             // textBox3
             // 
             this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(367, -78);
+            this.textBox3.Location = new System.Drawing.Point(-136, -78);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(441, 31);
             this.textBox3.TabIndex = 17;
@@ -334,7 +329,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(129)))), ((int)(((byte)(130)))));
-            this.label1.Location = new System.Drawing.Point(214, -74);
+            this.label1.Location = new System.Drawing.Point(-289, -74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 24);
             this.label1.TabIndex = 16;
@@ -351,7 +346,7 @@
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.Location = new System.Drawing.Point(0, -37);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(1006, 37);
+            this.button2.Size = new System.Drawing.Size(0, 37);
             this.button2.TabIndex = 15;
             this.button2.Text = "Пошук";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -391,7 +386,7 @@
             this.TableConsignment.AllowUserToDeleteRows = false;
             this.TableConsignment.AllowUserToResizeColumns = false;
             this.TableConsignment.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(233)))), ((int)(((byte)(130)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TableConsignment.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.TableConsignment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -486,7 +481,7 @@
             this.TableDrying.AllowUserToDeleteRows = false;
             this.TableDrying.AllowUserToResizeColumns = false;
             this.TableDrying.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(233)))), ((int)(((byte)(130)))));
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TableDrying.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.TableDrying.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -522,7 +517,7 @@
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.TableDrying.DefaultCellStyle = dataGridViewCellStyle8;
             this.TableDrying.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TableDrying.Location = new System.Drawing.Point(10, 0);
+            this.TableDrying.Location = new System.Drawing.Point(513, 0);
             this.TableDrying.Name = "TableDrying";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
@@ -537,7 +532,7 @@
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             this.TableDrying.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.TableDrying.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TableDrying.Size = new System.Drawing.Size(1006, 458);
+            this.TableDrying.Size = new System.Drawing.Size(0, 458);
             this.TableDrying.StandardTab = true;
             this.TableDrying.TabIndex = 18;
             this.TableDrying.Visible = false;
@@ -610,6 +605,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbReport)).EndInit();
             this.panelDate.ResumeLayout(false);
             this.panelDate.PerformLayout();
             this.panelSearch.ResumeLayout(false);
@@ -642,7 +638,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label labelNameProcess;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panelTable;
         protected System.Windows.Forms.DataGridView TableConsignment;
         private System.Windows.Forms.TextBox WeightValue;
@@ -668,5 +663,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.PictureBox pbReport;
     }
 }
