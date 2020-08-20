@@ -33,12 +33,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Storage));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Storage));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -55,6 +55,13 @@
             this.WeightConsignmentValue = new System.Windows.Forms.TextBox();
             this.AreaValue = new System.Windows.Forms.TextBox();
             this.btnInsertConsignment = new System.Windows.Forms.Button();
+            this.panelAdds = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelAdd = new System.Windows.Forms.Label();
+            this.panelSearchs = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.labelSearch = new System.Windows.Forms.Label();
+            this.pictureBoxClose = new System.Windows.Forms.PictureBox();
             this.panelRevision = new System.Windows.Forms.Panel();
             this.TableConsignment = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,22 +71,15 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelAdds = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labelAdd = new System.Windows.Forms.Label();
-            this.panelSearchs = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.labelSearch = new System.Windows.Forms.Label();
-            this.pictureBoxClose = new System.Windows.Forms.PictureBox();
             this.panelAdd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TableGarlic)).BeginInit();
-            this.panelRevision.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).BeginInit();
             this.panelAdds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSearchs.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).BeginInit();
+            this.panelRevision.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -121,22 +121,22 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 15.75F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(129)))), ((int)(((byte)(130)))));
-            this.label4.Location = new System.Drawing.Point(160, 117);
+            this.label4.Location = new System.Drawing.Point(141, 117);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 24);
+            this.label4.Size = new System.Drawing.Size(112, 24);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Площа";
+            this.label4.Text = "Площа,га";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 15.75F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(129)))), ((int)(((byte)(130)))));
-            this.label5.Location = new System.Drawing.Point(522, 123);
+            this.label5.Location = new System.Drawing.Point(507, 120);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 24);
+            this.label5.Size = new System.Drawing.Size(145, 24);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Вага партії";
+            this.label5.Text = "Вага партії,кг";
             // 
             // label6
             // 
@@ -189,7 +189,7 @@
             this.dateTimePickerDateReceiving.Name = "dateTimePickerDateReceiving";
             this.dateTimePickerDateReceiving.Size = new System.Drawing.Size(200, 27);
             this.dateTimePickerDateReceiving.TabIndex = 48;
-            this.dateTimePickerDateReceiving.Value = new System.DateTime(2020, 5, 15, 0, 0, 0, 0);
+            this.dateTimePickerDateReceiving.Value = new System.DateTime(2020, 6, 22, 0, 0, 0, 0);
             // 
             // dateTimePickerDateCollection
             // 
@@ -200,7 +200,7 @@
             this.dateTimePickerDateCollection.Name = "dateTimePickerDateCollection";
             this.dateTimePickerDateCollection.Size = new System.Drawing.Size(200, 27);
             this.dateTimePickerDateCollection.TabIndex = 47;
-            this.dateTimePickerDateCollection.Value = new System.DateTime(2020, 5, 15, 0, 0, 0, 0);
+            this.dateTimePickerDateCollection.Value = new System.DateTime(2020, 6, 22, 0, 0, 0, 0);
             // 
             // TableGarlic
             // 
@@ -273,6 +273,9 @@
             this.WeightConsignmentValue.Name = "WeightConsignmentValue";
             this.WeightConsignmentValue.Size = new System.Drawing.Size(221, 31);
             this.WeightConsignmentValue.TabIndex = 18;
+            this.WeightConsignmentValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.WeightConsignmentValue_KeyPress);
+            this.WeightConsignmentValue.Leave += new System.EventHandler(this.WeightConsignmentValue_Leave);
+            this.WeightConsignmentValue.MouseLeave += new System.EventHandler(this.WeightConsignmentValue_MouseLeave);
             // 
             // AreaValue
             // 
@@ -282,6 +285,8 @@
             this.AreaValue.Size = new System.Drawing.Size(221, 31);
             this.AreaValue.TabIndex = 17;
             this.AreaValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AreaValue_KeyPress);
+            this.AreaValue.Leave += new System.EventHandler(this.AreaValue_Leave);
+            this.AreaValue.MouseLeave += new System.EventHandler(this.AreaValue_MouseLeave);
             // 
             // btnInsertConsignment
             // 
@@ -297,6 +302,82 @@
             this.btnInsertConsignment.UseVisualStyleBackColor = true;
             this.btnInsertConsignment.Visible = false;
             this.btnInsertConsignment.Click += new System.EventHandler(this.btnInsertConsignment_Click);
+            // 
+            // panelAdds
+            // 
+            this.panelAdds.Controls.Add(this.pictureBox1);
+            this.panelAdds.Controls.Add(this.labelAdd);
+            this.panelAdds.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelAdds.Location = new System.Drawing.Point(0, 0);
+            this.panelAdds.Name = "panelAdds";
+            this.panelAdds.Size = new System.Drawing.Size(513, 640);
+            this.panelAdds.TabIndex = 17;
+            this.panelAdds.Click += new System.EventHandler(this.panelAdds_Click);
+            this.panelAdds.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAdds_Paint);
+            this.panelAdds.MouseEnter += new System.EventHandler(this.panelAdds_MouseEnter);
+            this.panelAdds.MouseLeave += new System.EventHandler(this.panelAdds_MouseLeave);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(185, 200);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelAdd
+            // 
+            this.labelAdd.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdd.Location = new System.Drawing.Point(130, 340);
+            this.labelAdd.Name = "labelAdd";
+            this.labelAdd.Size = new System.Drawing.Size(252, 77);
+            this.labelAdd.TabIndex = 0;
+            this.labelAdd.Text = "Додати";
+            this.labelAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // panelSearchs
+            // 
+            this.panelSearchs.Controls.Add(this.pictureBox2);
+            this.panelSearchs.Controls.Add(this.labelSearch);
+            this.panelSearchs.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelSearchs.Location = new System.Drawing.Point(513, 0);
+            this.panelSearchs.Name = "panelSearchs";
+            this.panelSearchs.Size = new System.Drawing.Size(513, 640);
+            this.panelSearchs.TabIndex = 18;
+            this.panelSearchs.Click += new System.EventHandler(this.panelSearchs_Click);
+            this.panelSearchs.MouseEnter += new System.EventHandler(this.panelSearchs_MouseEnter);
+            this.panelSearchs.MouseLeave += new System.EventHandler(this.panelSearchs_MouseLeave);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(205, 220);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // labelSearch
+            // 
+            this.labelSearch.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSearch.Location = new System.Drawing.Point(76, 340);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(396, 103);
+            this.labelSearch.TabIndex = 1;
+            this.labelSearch.Text = "Переглянути";
+            this.labelSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBoxClose
+            // 
+            this.pictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxClose.Image")));
+            this.pictureBoxClose.Location = new System.Drawing.Point(968, 12);
+            this.pictureBoxClose.Name = "pictureBoxClose";
+            this.pictureBoxClose.Size = new System.Drawing.Size(34, 34);
+            this.pictureBoxClose.TabIndex = 19;
+            this.pictureBoxClose.TabStop = false;
+            this.pictureBoxClose.Visible = false;
+            this.pictureBoxClose.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // panelRevision
             // 
@@ -400,82 +481,6 @@
             this.Column5.HeaderText = "Вага";
             this.Column5.Name = "Column5";
             // 
-            // panelAdds
-            // 
-            this.panelAdds.Controls.Add(this.pictureBox1);
-            this.panelAdds.Controls.Add(this.labelAdd);
-            this.panelAdds.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelAdds.Location = new System.Drawing.Point(0, 0);
-            this.panelAdds.Name = "panelAdds";
-            this.panelAdds.Size = new System.Drawing.Size(513, 640);
-            this.panelAdds.TabIndex = 17;
-            this.panelAdds.Click += new System.EventHandler(this.panelAdds_Click);
-            this.panelAdds.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAdds_Paint);
-            this.panelAdds.MouseEnter += new System.EventHandler(this.panelAdds_MouseEnter);
-            this.panelAdds.MouseLeave += new System.EventHandler(this.panelAdds_MouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(185, 200);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // labelAdd
-            // 
-            this.labelAdd.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAdd.Location = new System.Drawing.Point(130, 340);
-            this.labelAdd.Name = "labelAdd";
-            this.labelAdd.Size = new System.Drawing.Size(252, 77);
-            this.labelAdd.TabIndex = 0;
-            this.labelAdd.Text = "Додати";
-            this.labelAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panelSearchs
-            // 
-            this.panelSearchs.Controls.Add(this.pictureBox2);
-            this.panelSearchs.Controls.Add(this.labelSearch);
-            this.panelSearchs.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSearchs.Location = new System.Drawing.Point(513, 0);
-            this.panelSearchs.Name = "panelSearchs";
-            this.panelSearchs.Size = new System.Drawing.Size(513, 640);
-            this.panelSearchs.TabIndex = 18;
-            this.panelSearchs.Click += new System.EventHandler(this.panelSearchs_Click);
-            this.panelSearchs.MouseEnter += new System.EventHandler(this.panelSearchs_MouseEnter);
-            this.panelSearchs.MouseLeave += new System.EventHandler(this.panelSearchs_MouseLeave);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(205, 220);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // labelSearch
-            // 
-            this.labelSearch.Font = new System.Drawing.Font("Century Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSearch.Location = new System.Drawing.Point(76, 340);
-            this.labelSearch.Name = "labelSearch";
-            this.labelSearch.Size = new System.Drawing.Size(396, 103);
-            this.labelSearch.TabIndex = 1;
-            this.labelSearch.Text = "Переглянути";
-            this.labelSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBoxClose
-            // 
-            this.pictureBoxClose.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxClose.Image")));
-            this.pictureBoxClose.Location = new System.Drawing.Point(968, 12);
-            this.pictureBoxClose.Name = "pictureBoxClose";
-            this.pictureBoxClose.Size = new System.Drawing.Size(34, 34);
-            this.pictureBoxClose.TabIndex = 19;
-            this.pictureBoxClose.TabStop = false;
-            this.pictureBoxClose.Visible = false;
-            this.pictureBoxClose.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
             // Storage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -495,13 +500,13 @@
             this.panelAdd.ResumeLayout(false);
             this.panelAdd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TableGarlic)).EndInit();
-            this.panelRevision.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).EndInit();
             this.panelAdds.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSearchs.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxClose)).EndInit();
+            this.panelRevision.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TableConsignment)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,7 +529,6 @@
         private System.Windows.Forms.Button btnInsertConsignment;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateReceiving;
         private System.Windows.Forms.DateTimePicker dateTimePickerDateCollection;
-        private System.Windows.Forms.Panel panelRevision;
         private System.Windows.Forms.Panel panelAdds;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelAdd;
@@ -532,6 +536,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.PictureBox pictureBoxClose;
+        private System.Windows.Forms.Panel panelRevision;
         protected System.Windows.Forms.DataGridView TableConsignment;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;

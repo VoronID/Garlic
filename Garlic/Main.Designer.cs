@@ -348,6 +348,7 @@
             this.labelNavigation.TabIndex = 0;
             this.labelNavigation.Text = "label1";
             this.labelNavigation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelNavigation.Visible = false;
             // 
             // panelContent
             // 

@@ -1,4 +1,5 @@
-﻿using Garlic.Model;
+﻿using Garlic.Controller;
+using Garlic.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,15 @@ namespace Garlic
 {
     public partial class Mapa : Form
     {
+        int countConsignment = 0;
         SellClass sell = new SellClass();
         WriteOffClass WriteOffClass = new WriteOffClass();
         Control_Weighing Control_Weighing;
         RefrigeratorClass refrigerator;
         WriteOff WriteOff;
+        Button Buttons;
         Sell Sell;
+        MapaClass mapaClass;
         List<string> numberConsignment = new List<string>(6);
         Model.NewConsignment NewConsignment = new Model.NewConsignment();
          string column;
@@ -28,6 +32,7 @@ namespace Garlic
         string Form = "";
         public Mapa(string form)
         {
+      
             InitializeComponent();
             Form = form;
         }
@@ -54,80 +59,60 @@ namespace Garlic
         }
         private void Mapa_Load(object sender, EventArgs e)
         {
+            mapaClass = new MapaClass(button3.Location.Y, button4.Location.Y, button5.Location.Y, button8.Location.Y, button9.Location.Y, button10.Location.Y, button11.Location.Y, button12.Location.Y, button13.Location.Y, button14.Location.Y, button15.Location.Y, button16.Location.Y, button17.Location.Y, button3.Location.X, button18.Location.X, button37.Location.X, button56.Location.X, button69.Location.X, button82.Location.X, button95.Location.X, button108.Location.X, button121.Location.X, button134.Location.X, button147.Location.X, button160.Location.X, button170.Location.X, button186.Location.X, button199.Location.X, button212.Location.X);
             LoadCountConsignment();
+            valueConsignament.Text = countConsignment.ToString();
+            this.KeyPreview = true;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Mapa_Load_KeyDown);
+            Main.sQLFunction.SearchNumberNewConsignment(valueCodeConsignment, "in refrigerator");
+
+
+        }
+        private void Mapa_Load_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if(panelConsignment.Visible==true)
+                {
+                    panelConsignment.Visible = false;
+                    StandartButton();
+
+                }
+            }
+               
         }
 
         void LoadCountConsignment()
         {
-   
             foreach (Control previousBtn in Controller.Controls)
             {
                 if (previousBtn.GetType() == typeof(Button))
                 {
-                    CalculationBox((Button)previousBtn);
-                    previousBtn.Text = Main.sQLFunction.LoadCountConsignmentInCell(refrigerator).ToString();
+                    
+                    previousBtn.Text = Main.sQLFunction.LoadCountConsignmentInCell(mapaClass.CalculationBox((Button)previousBtn)).ToString();
+                    countConsignment = countConsignment+Convert.ToInt32(previousBtn.Text);
                 }
                
             }
         }
-      
 
-void CalculationBox(Button panel)
+
+        void StandartButton()
         {
-
-            if(panel.Location.X<432)
+            foreach (Control previousBtn in panelConsignment.Controls)
             {
-                switch (panel.Location.X)
+                if (previousBtn.GetType() == typeof(Button))
                 {
-                    case 58: { column = "A"; break; }
-                    case 120: { column = "B"; break; }
-                    case 166: { column = "C"; break; }
-                    case 226: { column = "D"; break; }
-                    case 272: { column = "E"; break; }
-                    case 330: { column = "F"; break; }
-                    case 376: { column = "G"; break; }
-                    case 431: { column = "H"; break; }
+                   if(previousBtn.BackColor == Color.Coral)
+                    {
+                        previousBtn.BackColor = SystemColors.ActiveBorder;
+                        if(Buttons!=null)
+                        {
+                            Buttons.BackColor = Color.FromArgb(0, 150, 136);
+                        }
+                    }
                 }
-                storage = "K1";
             }
-            else
-            {
-                switch (panel.Location.X)
-                {
-                    case 590: { column = "A"; break; }
-                    case 652: { column = "B"; break; }
-                    case 698: { column = "C"; break; }
-                    case 758: { column = "D"; break; }
-                    case 804: { column = "E"; break; }
-                    case 862: { column = "F"; break; }
-                    case 908: { column = "G"; break; }
-                    case 963: { column = "H"; break; }
-                }
-                storage = "K2";
-            }
-            switch (panel.Location.Y)
-            {
-                case 121: { rows = 1; break; }
-                case 157: { rows = 2; break; }
-                case 193: { rows = 3; break; }
-                case 229: { rows = 4; break; }
-                case 265: { rows = 5; break; }
-                case 301: { rows = 6; break; }
-                case 337: { rows = 7; break; }
-                case 373: { rows = 8; break; }
-                case 409: { rows = 9; break; }
-                case 445: { rows = 10; break; }
-                case 481: { rows = 11; break; }
-                case 517: { rows = 12; break; }
-                case 553: { rows = 13; break; }
-            }
-            refrigerator = new RefrigeratorClass(storage, column, rows);
-            //MessageBox.Show("Склад:"+storage+" Ряд:"+rows+" Колонка:"+column);
-
-            //panelConsignment.Visible = true;
-            //panelConsignment.Location = new Point(panel10.Location.X + panel10.Width + 1, panel10.Location.Y - 76);
-
-
         }
 
 
@@ -145,54 +130,7 @@ void CalculationBox(Button panel)
         void CalculationBoxs(Button panel)
         {
 
-            if (panel.Location.X < 432)
-            {
-                switch (panel.Location.X)
-                {
-                    case 58: { column = "A"; break; }
-                    case 120: { column = "B"; break; }
-                    case 166: { column = "C"; break; }
-                    case 226: { column = "D"; break; }
-                    case 272: { column = "E"; break; }
-                    case 330: { column = "F"; break; }
-                    case 376: { column = "G"; break; }
-                    case 431: { column = "H"; break; }
-                }
-                storage = "K1";
-            }
-            else
-            {
-                switch (panel.Location.X)
-                {
-                    case 590: { column = "A"; break; }
-                    case 652: { column = "B"; break; }
-                    case 698: { column = "C"; break; }
-                    case 758: { column = "D"; break; }
-                    case 804: { column = "E"; break; }
-                    case 862: { column = "F"; break; }
-                    case 908: { column = "G"; break; }
-                    case 963: { column = "H"; break; }
-                }
-                storage = "K2";
-            }
-            switch (panel.Location.Y)
-            {
-                case 121: { rows = 1; break; }
-                case 157: { rows = 2; break; }
-                case 193: { rows = 3; break; }
-                case 229: { rows = 4; break; }
-                case 265: { rows = 5; break; }
-                case 301: { rows = 6; break; }
-                case 337: { rows = 7; break; }
-                case 373: { rows = 8; break; }
-                case 409: { rows = 9; break; }
-                case 445: { rows = 10; break; }
-                case 481: { rows = 11; break; }
-                case 517: { rows = 12; break; }
-                case 553: { rows = 13; break; }
-            }
-            refrigerator = new RefrigeratorClass(storage, column, rows);
-          
+            refrigerator = mapaClass.CalculationBox(panel);
             panelConsignment.Visible = true;
             if (panel.Location.X<590)
             {
@@ -255,9 +193,6 @@ void CalculationBox(Button panel)
             }
             if (btnConsignment2.Text != "Пусто"&& btnConsignment3.Text == "Пусто")
             {
-              
-
-
                 btnConsignment1.Enabled = false;
                 btnConsignment2.Enabled = false;
                 btnConsignment3.Enabled = true;
@@ -314,9 +249,8 @@ void CalculationBox(Button panel)
 
         }
 
-        private void panel_Click(object sender, EventArgs e)
+        public void panel_Click(object sender, EventArgs e)
         {
-
             int count;
             ClearButton();
             CalculationBoxs((Button)sender);
@@ -483,6 +417,93 @@ void CalculationBox(Button panel)
         private void btnConsignment6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label46_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void valueCodeConsignment_Leave(object sender, EventArgs e)
+        {
+            if (valueCodeConsignment.Text == "")
+            {
+                valueCodeConsignment.Text = "Код партії";
+            }
+        }
+
+        private void valueCodeConsignment_Enter(object sender, EventArgs e)
+        {
+            if (valueCodeConsignment.Text == "Код партії")
+            {
+                valueCodeConsignment.Text = "";
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if(valueCodeConsignment.Visible==false)
+            {
+                valueCodeConsignment.Visible = true;
+                return;
+            }
+            else
+            {
+                if (valueCodeConsignment.Text != "Код партії" && valueCodeConsignment.Text != "")
+                {
+                    StandartButton();
+                    if (Main.sQLFunction.CheckProcess(valueCodeConsignment.Text))
+                    {
+                        RefrigeratorClass refrigeratorSearch = Main.sQLFunction.SearchConsignment(valueCodeConsignment.Text);
+                        Point point = mapaClass.SearchLocationConsignment(refrigeratorSearch.Rows, refrigeratorSearch.Column, refrigeratorSearch.Camera);
+                        ClickButton(point, refrigeratorSearch.Storey);
+                        valueCodeConsignment.Text = "";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не знайдено партію");
+                        valueCodeConsignment.Text = "";
+                    }
+                }
+            }
+        }
+
+        void ClickButton(Point point,int storage)
+        {
+            Button button; 
+            foreach (Control previousBtn in Controller.Controls)
+            {
+                if (previousBtn.GetType() == typeof(Button))
+                {
+                   
+                    if (previousBtn.Location.X== point.X&& previousBtn.Location.Y == point.Y)
+                    {
+                        button = (Button)previousBtn;
+                        Buttons = (Button)previousBtn;
+                        previousBtn.BackColor = Color.Coral;
+                        button.Click += new EventHandler(this.panel_Click);
+                        button.PerformClick();
+                    }
+                   
+                }
+            }
+            switch(storage)
+            {
+                case 1: { btnConsignment1.BackColor = Color.Coral; break; }
+                case 2: { btnConsignment2.BackColor = Color.Coral; break; }
+                case 3: { btnConsignment3.BackColor = Color.Coral; break; }
+                case 4: { btnConsignment4.BackColor = Color.Coral; break; }
+                case 5: { btnConsignment5.BackColor = Color.Coral; break; }
+                case 6: { btnConsignment6.BackColor = Color.Coral; break; }
+            }
+        }
+
+        private void button3_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                MessageBox.Show("Права клавіша");
+            }
         }
     }
 }

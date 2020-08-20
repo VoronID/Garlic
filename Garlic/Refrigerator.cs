@@ -20,6 +20,7 @@ namespace Garlic
         {
             InitializeComponent();
             refrigeratorClass = new RefrigeratorClass();
+         
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -57,6 +58,8 @@ namespace Garlic
         private void Refrigerator_Load(object sender, EventArgs e)
         {
             Main.sQLFunction.LoadNewConsignment(TableNewConsignment);
+            Main.sQLFunction.SearchNumberNewConsignment(valueNumberConsignment, "storage");
+         
         }
 
         private void TableNewConsignment_DoubleClick(object sender, EventArgs e)
@@ -64,6 +67,20 @@ namespace Garlic
             codeNumber = this.TableNewConsignment.SelectedRows[0].Cells[0].Value.ToString();
             MessageBox.Show("Вибрано партію з кодом:" + codeNumber);
         
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            if(panelSearch.Height == 0)
+                panelSearch.Height = 80;
+            else
+                panelSearch.Height = 0;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TableNewConsignment.Rows.Clear();
+            Main.sQLFunction.SearchNewConsignment(TableNewConsignment, "storage", valueNumberConsignment.Text);
         }
     }
 }

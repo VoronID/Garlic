@@ -106,7 +106,7 @@ namespace Garlic
         {
             WriteOffClass.DateOperation = Convert.ToDateTime(dTPDate.Value.ToShortDateString());
             Main.sQLFunction.InsertWriteOff(WriteOffClass);
-            Main.sQLFunction.RelocationRefrigerator(refrigeratorClass);
+            Main.sQLFunction.RelocationRefrigerator(refrigeratorClass,"WriteOff");
         }
 
         private void pictureBox9_Click(object sender, EventArgs e)

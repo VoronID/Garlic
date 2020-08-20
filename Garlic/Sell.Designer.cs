@@ -69,7 +69,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Калібер = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Калібр = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -385,6 +385,7 @@
             this.valuePrice.Name = "valuePrice";
             this.valuePrice.Size = new System.Drawing.Size(179, 37);
             this.valuePrice.TabIndex = 31;
+            this.valuePrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valuePrice_KeyPress);
             this.valuePrice.MouseLeave += new System.EventHandler(this.valuePrice_MouseLeave);
             // 
             // dTPDate
@@ -461,7 +462,7 @@
             this.Column1,
             this.Column2,
             this.Column5,
-            this.Калібер,
+            this.Калібр,
             this.Column6,
             this.Column7,
             this.Column3,
@@ -511,10 +512,10 @@
             this.Column5.HeaderText = "Вага";
             this.Column5.Name = "Column5";
             // 
-            // Калібер
+            // Калібр
             // 
-            this.Калібер.HeaderText = "Калібер";
-            this.Калібер.Name = "Калібер";
+            this.Калібр.HeaderText = "Калібр";
+            this.Калібр.Name = "Калібр";
             // 
             // Column6
             // 
@@ -605,16 +606,16 @@
         private System.Windows.Forms.DateTimePicker dTPFrom;
         private System.Windows.Forms.Label label6;
         protected System.Windows.Forms.DataGridView TableNewConsignment;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Калібер;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Калібр;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }

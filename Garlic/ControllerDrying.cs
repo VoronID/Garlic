@@ -14,6 +14,7 @@ namespace Garlic
     public partial class ControllerDrying : Form
     {
         Main main = new Main();
+        double WeightConsignment;
         public ControllerDrying(Main _main)
         {
             main = _main;
@@ -159,6 +160,7 @@ namespace Garlic
             if(Process=="Take")
             {
                 CodeConsignment = TableConsignment.SelectedRows[0].Cells[0].Value.ToString();
+                WeightConsignment = Main.sQLFunction.LoadWeightConsignment(CodeConsignment);
                 MessageBox.Show("Партію:" + CodeConsignment + ".Вибрано");
             }
 
@@ -279,6 +281,38 @@ namespace Garlic
         {
             ReportViwer reportViwer = new ReportViwer("Drying");
             reportViwer.ShowDialog();
+        }
+
+        private void WeightValue_Leave(object sender, EventArgs e)
+        {
+           
+           
+        }
+
+        private void WeightValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void WeightValue_MouseLeave(object sender, EventArgs e)
+        {
+            if (WeightValue.Text != "")
+            {
+                if (Convert.ToDouble(WeightValue.Text) > WeightConsignment)
+                {
+                    WeightValue.Text = "";
+                    MessageBox.Show("Вага партії, після сушки, не можу бути меншою або рівною. Ваги перед сушкою");
+                }
+                else if (Convert.ToDouble(WeightValue.Text) == 0)
+                {
+                    WeightValue.Text = "";
+                    MessageBox.Show("Вага партії, після сушки, не може дорівнювати нулю");
+                }
+            }
         }
     }
 }

@@ -259,7 +259,8 @@
             this.valueActualWeight.Name = "valueActualWeight";
             this.valueActualWeight.Size = new System.Drawing.Size(143, 31);
             this.valueActualWeight.TabIndex = 30;
-            this.valueActualWeight.Leave += new System.EventHandler(this.valueActualWeight_Leave);
+            this.valueActualWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valueActualWeight_KeyPress);
+            this.valueActualWeight.MouseLeave += new System.EventHandler(this.valueActualWeight_MouseLeave);
             // 
             // value
             // 
@@ -438,6 +439,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Control_Weighing";
             this.Text = "Control_Weighing";
+            this.Load += new System.EventHandler(this.Control_Weighing_Load);
             this.panelAdds.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSearchs.ResumeLayout(false);

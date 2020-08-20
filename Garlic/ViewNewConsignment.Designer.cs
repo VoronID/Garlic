@@ -113,9 +113,9 @@
             this.label4.Font = new System.Drawing.Font("Century Gothic", 18F);
             this.label4.Location = new System.Drawing.Point(93, 178);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 30);
+            this.label4.Size = new System.Drawing.Size(94, 30);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Калібер";
+            this.label4.Text = "Калібр";
             // 
             // label5
             // 

@@ -25,6 +25,11 @@ namespace Garlic
         {
             Main.sQLFunction.InsertNewConsignment(valueNumber.Text, DateTime.Now.ToShortDateString(), Convert.ToDouble(valueWeight.Text),Convert.ToInt32(valueCaliber.Text), "storage", Garlic.CodeGarlic);
             MessageBox.Show("Партію "+ valueNumber.Text + " внесено");
+            valueNumber.Text = "";
+            valueCaliber.Text = "";
+            valueWeight.Text = "";
+
+
         }
 
         private void NewConsignment_Load(object sender, EventArgs e)
@@ -102,6 +107,66 @@ namespace Garlic
             Garlic = new Garlics(this.TableGarlic.SelectedRows[0].Cells[0].Value.ToString(), this.TableGarlic.SelectedRows[0].Cells[1].Value.ToString());
             MessageBox.Show("Вибрано часник з назвою '" + Garlic.Name + "' та типом '" + Garlic.Sort + "'");
             Garlic.CodeGarlic = Main.sQLFunction.GetGarlicCode(Garlic);
+        }
+
+        private void valueWeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void valueCaliber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void valueWeight_Leave(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void valueCaliber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void valueCaliber_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void valueWeight_MouseLeave(object sender, EventArgs e)
+        {
+            if (valueWeight.Text != "")
+            {
+                if (Convert.ToDouble(valueWeight.Text) == 0)
+                {
+                    MessageBox.Show("Вага не може дорівнювати нулю");
+                    valueWeight.Text = "";
+                }
+
+            }
+        }
+
+        private void valueCaliber_MouseLeave(object sender, EventArgs e)
+        {
+            if (valueCaliber.Text != "")
+            {
+                if (Convert.ToDouble(valueCaliber.Text) == 0)
+                {
+                    MessageBox.Show("Калібр не може дорівнювати нулю");
+                    valueCaliber.Text = "";
+                }
+
+            }
         }
     }
 }

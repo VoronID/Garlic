@@ -194,42 +194,49 @@ namespace Garlic
         private void btnGarlic_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ЧАСНИК";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Garlic());
         }
 
         private void btnWarehouse_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ПРИЙМАННЯ НА СКЛАД";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Storage());
         }
 
         public void btnDrying_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "СУШКА";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new ControllerDrying(this));
         }
 
         private void btnCaliber_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "КАЛІБРУВАННЯ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Calibration());
         }
 
         public void btnNewConsignment_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "НОВА ПАРТІЯ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new NewConsignment(this));
         }
 
         private void btnRefrigerator_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ХОЛОДИЛЬНИК";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Refrigerator());
         }
 
         public void btnWeighing_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "КОНТРОЛЬНЕ ЗВАЖУВАННЯ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Control_Weighing(this));
             //Graphs graphs = new Graphs();
             //graphs.ShowDialog();
@@ -238,12 +245,14 @@ namespace Garlic
         public void btnSelling_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ПРОДАЖ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Sell(this));
         }
 
         private void btnMap_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "МАПА";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Mapa("Mapa"));
         }
 
@@ -263,12 +272,14 @@ namespace Garlic
         private void btnReport_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "ЗВІТИ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new Reports());
         }
 
         public void button1_Click(object sender, EventArgs e)
         {
             labelNavigation.Text = "СПИСАННЯ";
+            labelNavigation.Visible = true;
             OpenlyFormInPanel(new WriteOff(this));
         }
 

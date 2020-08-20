@@ -38,6 +38,8 @@ namespace Garlic
                     panel1.Visible = false;
                     Main.sQLFunction.InsertInCalibration(CodeConsignment, Convert.ToDateTime(dtPDate.Value.ToShortDateString()));
                     MessageBox.Show("Партія:"+CodeConsignment+". Відправлена на калібровку");
+                    TableConsignment.Rows.Clear();
+                    Main.sQLFunction.LoadConsignmentInProcess(TableConsignment, "after drying");
                 }
               
             }
@@ -48,10 +50,10 @@ namespace Garlic
         {
             if (panelSearch.Height == 0)
             {
-                panelSearch.Height = panelSearch.Height + 90;
+                panelSearch.Height = panelSearch.Height + 80;
                 return;
             }
-            if (panelSearch.Height == 90)
+            if (panelSearch.Height == 80)
             {
                 panelSearch.Height = 0;
                 return;
@@ -61,12 +63,28 @@ namespace Garlic
         private void Calibration_Load(object sender, EventArgs e)
         {
             Main.sQLFunction.LoadConsignmentInProcess(TableConsignment, "after drying");
+            Main.sQLFunction.SearchNumberConsignment(valueCodeConsignment, "after drying");
         }
 
         private void TableConsignment_DoubleClick(object sender, EventArgs e)
         {
             CodeConsignment = TableConsignment.SelectedRows[0].Cells[0].Value.ToString();
             MessageBox.Show("Вибрано партію:" + CodeConsignment);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (valueCodeConsignment.Text != null)
+            {
+                TableConsignment.Rows.Clear();
+                Main.sQLFunction.SearchConsignment(TableConsignment, "after drying", valueCodeConsignment.Text);
+            }
+            else
+            {
+                MessageBox.Show("Введіть код партії!");
+            }
+               
+
         }
     }
 }

@@ -24,13 +24,17 @@ namespace Garlic
         {
             InitializeComponent();
             main = _main;
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("uk-UA");
-            //System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("uk-UA");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("uk-UA");
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("uk-UA");
+            targetCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            //System.Threading.Thread.CurrentThread.CurrentCulture.NumberFormat = new NumberFormatInfo();
+ 
 
-            ////а здесь формирую культуру на основе текущей(русской) и устанавливаю десятичный разделитель
-            //System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(Application.CurrentCulture.Name);
-            //culture.NumberFormat.CurrencyDecimalSeparator = ",";
-            //Application.CurrentCulture = culture;
+            //а здесь формирую культуру на основе текущей(русской) и устанавливаю десятичный разделитель
+            System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo(Application.CurrentCulture.Name);
+            culture.NumberFormat.CurrencyDecimalSeparator = ",";
+            Application.CurrentCulture = culture;
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -51,6 +55,7 @@ namespace Garlic
         
         DateTimeStyles styles = DateTimeStyles.None;
         CultureInfo culture = CultureInfo.CreateSpecificCulture("uk-UA");
+        CultureInfo targetCulture;
 
         public void AddRecord()
         {
@@ -144,10 +149,7 @@ namespace Garlic
             fh.Show();
         }
 
-        private void valueActualWeight_Leave(object sender, EventArgs e)
-        {
-            valueDeviation.Text = Math.Round((Convert.ToDouble(valueStateWeight.Text) - Convert.ToDouble(valueActualWeight.Text)),2).ToString();
-        }
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -165,6 +167,48 @@ namespace Garlic
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             main.btnWeighing_Click(this,null);
+        }
+
+        private void Control_Weighing_Load(object sender, EventArgs e)
+        {
+      
+            valueStateWeight.Enabled = false;
+        }
+
+        private void valueActualWeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void valueActualWeight_MouseLeave(object sender, EventArgs e)
+        {
+            if (valueActualWeight.Text != "")
+            {
+                if (Convert.ToInt32(valueActualWeight.Text) == 0)
+                {
+                    MessageBox.Show("Вага не може дорівнювати нулю");
+                    valueActualWeight.Text = "";
+                    valueDeviation.Text = "";
+                }
+                else
+                {
+                    if (Convert.ToDouble(valueActualWeight.Text) < Convert.ToDouble(valueStateWeight.Text))
+                    {
+                        valueDeviation.Text = Math.Round((Convert.ToDouble(valueStateWeight.Text) - Convert.ToDouble(valueActualWeight.Text)), 2).ToString();
+                    }
+                    else
+                    {
+                        valueActualWeight.Text = "";
+                        valueDeviation.Text = "";
+                        MessageBox.Show("Вага не може бути більшою за попередню");
+                    }
+                }
+                
+            }
         }
     }
 }

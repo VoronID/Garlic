@@ -35,11 +35,16 @@ namespace Garlic
 
         private void btnInsertConsignment_Click(object sender, EventArgs e)
         {
-            Consignment consignment = new Consignment(NumberConsignmentValue.Text, Convert.ToDateTime(dateTimePickerDateCollection.Value.ToShortDateString()), Convert.ToDateTime(dateTimePickerDateReceiving.Value.ToShortDateString()), Convert.ToDouble(AreaValue.Text), "storage", Convert.ToDouble(WeightConsignmentValue.Text), garlics.CodeGarlic);
-            Main.sQLFunction.InsertConsignment(consignment);
-            NumberConsignmentValue.Text = "";
-            AreaValue.Text = "";
-            WeightConsignmentValue.Text = "";
+            if (garlics==null)
+                MessageBox.Show("Не вибраний часник!");
+            else
+            {
+                Consignment consignment = new Consignment(NumberConsignmentValue.Text, Convert.ToDateTime(dateTimePickerDateCollection.Value.ToShortDateString()), Convert.ToDateTime(dateTimePickerDateReceiving.Value.ToShortDateString()), Convert.ToDouble(AreaValue.Text), "storage", Convert.ToDouble(WeightConsignmentValue.Text), garlics.CodeGarlic);
+                Main.sQLFunction.InsertConsignment(consignment);
+                NumberConsignmentValue.Text = "";
+                AreaValue.Text = "";
+                WeightConsignmentValue.Text = "";
+            }
 
         }
 
@@ -127,6 +132,51 @@ namespace Garlic
             btnInsertConsignment.Visible = false;
             panelRevision.Visible = false;
             pictureBoxClose.Visible = false;
+        }
+
+        private void AreaValue_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void WeightConsignmentValue_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void WeightConsignmentValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void AreaValue_MouseLeave(object sender, EventArgs e)
+        {
+            if (AreaValue.Text != "")
+            {
+                if (Convert.ToDouble(AreaValue.Text) == 0)
+                {
+                    MessageBox.Show("Площа не може дорівнювати нулю");
+                    AreaValue.Text = "";
+                }
+
+            }
+        }
+
+        private void WeightConsignmentValue_MouseLeave(object sender, EventArgs e)
+        {
+            if (WeightConsignmentValue.Text != "")
+            {
+                if (Convert.ToDouble(WeightConsignmentValue.Text) == 0)
+                {
+                    MessageBox.Show("Вага не може дорівнювати нулю");
+                    WeightConsignmentValue.Text = "";
+                }
+
+            }
         }
     }
 }

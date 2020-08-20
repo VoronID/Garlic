@@ -66,11 +66,19 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="MindFusion.Barcodes, Version=1.0.2.452, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Barcodes.WinForms, Version=1.0.2.452, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
+    <Reference Include="MindFusion.Common, Version=1.3.2.451, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
+    <Reference Include="MindFusion.Common.WinForms, Version=1.0.2.452, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
+    <Reference Include="MindFusion.Licensing, Version=1.0.4.38034, Culture=neutral, PublicKeyToken=9d02e21d957ddaef" />
+    <Reference Include="MindFusion.Scheduling, Version=5.7.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455, processorArchitecture=MSIL" />
+    <Reference Include="MindFusion.UI.WinForms, Version=1.2.1.450, Culture=neutral, PublicKeyToken=dd7449df9ffcc455" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -101,8 +109,9 @@
     <Compile Include="ControllerDrying.Designer.cs">
       <DependentUpon>ControllerDrying.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controller\ControllerConsignment.cs" />
-    <Compile Include="Controller\ControllerGarlic.cs" />
+    <Compile Include="Controller\Column.cs" />
+    <Compile Include="Controller\MapaClass.cs" />
+    <Compile Include="Controller\Rows.cs" />
     <Compile Include="Control_Weighing.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -263,6 +272,12 @@
     <EmbeddedResource Include="Refrigerator.resx">
       <DependentUpon>Refrigerator.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Refrigerator.uk-UA.resx">
+      <DependentUpon>Refrigerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Refrigerator.uk.resx">
+      <DependentUpon>Refrigerator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportDrying.rdlc" />
     <EmbeddedResource Include="Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>
@@ -344,5 +359,6 @@
   <ItemGroup>
     <Content Include="box.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

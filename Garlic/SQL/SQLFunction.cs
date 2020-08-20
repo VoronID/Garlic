@@ -238,20 +238,63 @@ namespace Garlic.SQL
                 }
             }
         }
+        public void SearchNumberNewConsignment(TextBox textBox, string process)
+        {
+            try
+            {
+                conn.Open();
+                List<string> NameList = new List<string>();
+                string query = "Select Code_New_Consignment FROM New_Consignment WHERE State_Consignment = '" + process + "'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
 
+                while (dr.Read())
+                {
+                    NameList.Add(dr.GetValue(0).ToString());
+                }
+                conn.Close();
+                dr.Close();
+                foreach (string p in NameList)
+                {
+                    textBox.AutoCompleteCustomSource.Add(p);
+                }
 
-        public void RelocationRefrigerator(RefrigeratorClass refrigeratorClass)
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void RelocationRefrigerator(RefrigeratorClass refrigeratorClass,string process)
         {
             DeleteRefrigerator(refrigeratorClass);
             Dictionary<string, int> consignmentWhichAreAbove = new Dictionary<string, int>();
             LoadConsignmentThatAreHigherLevel(refrigeratorClass, ref consignmentWhichAreAbove);
-
             foreach (var pair in consignmentWhichAreAbove)
             {
                 UpdateCellConsignment(pair.Key, pair.Value);
             }
+            if (process == "WriteOff") 
+            {
+                WriteOff(refrigeratorClass);
+            }
+            if (process == "Sell") 
+            {
+                Sell(refrigeratorClass);
+            }
  
         }
+
+
 
         public void DeleteRefrigerator(RefrigeratorClass refrigeratorClass)
         {
@@ -277,6 +320,54 @@ namespace Garlic.SQL
             }
         }
 
+
+        public void WriteOff(RefrigeratorClass refrigeratorClass)
+        {
+            string sqlExpression = "Update New_Consignment SET State_Consignment = 'writeOff' WHERE Code_New_Consignment = '" + refrigeratorClass.CodeNumber + "'";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlExpression, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void Sell(RefrigeratorClass refrigeratorClass)
+        {
+            string sqlExpression = "Update New_Consignment SET State_Consignment = 'sell' WHERE Code_New_Consignment = '" + refrigeratorClass.CodeNumber + "'";
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sqlExpression, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
         public void LoadConsignmentInProcess(DataGridView dataGridView,string Process)
         {
             
@@ -922,7 +1013,39 @@ namespace Garlic.SQL
             }
         }
 
-        public void InsertControlWeight(Control_WeighingClass control_WeighingClass)
+        public double LoadWeightConsignment(string codeConsignment)
+        {
+            double weight=0.0;
+            try
+            {
+                conn.Open();
+                string query = "Select WeightConsignment From Consignment Where Number_Consignment ='" + codeConsignment + "'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    weight=Convert.ToDouble(dr.GetValue(0));
+                }
+                conn.Close();
+                dr.Close();
+                return weight;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+            public void InsertControlWeight(Control_WeighingClass control_WeighingClass)
         {
             try
             {
@@ -979,6 +1102,113 @@ namespace Garlic.SQL
                     conn.Close();
                 }
             }
+        }
+
+        public void SearchNumberConsignment(TextBox textBox,string process)
+        {
+            try
+            {
+                conn.Open();
+                List<string> NameList = new List<string>();
+                string query = "Select Number_Consignment FROM Consignment WHERE Process = '" + process + "'";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    NameList.Add(dr.GetValue(0).ToString());
+                }
+                conn.Close();
+                dr.Close();
+                foreach (string p in NameList)
+                {
+                    textBox.AutoCompleteCustomSource.Add(p);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void SearchConsignment(DataGridView dataGridView, string Process, string numberConsignment)
+        {
+            string sqlExpression = "sp_ViewConsignmentProcessNumberConsignment";
+           
+                conn.Open();
+                SqlCommand command = new SqlCommand(sqlExpression, conn);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                SqlParameter ProcessParam = new SqlParameter
+                {
+                    ParameterName = "@Process",
+                    Value = Process
+                };
+                command.Parameters.Add(ProcessParam);
+
+                SqlParameter NumberConsignment = new SqlParameter
+                {
+                    ParameterName = "@Number_Consignment",
+                    Value = numberConsignment
+                };
+                command.Parameters.Add(NumberConsignment);
+                SqlDataReader reader = command.ExecuteReader();
+                List<string[]> data = new List<string[]>();
+
+                while (reader.Read())
+                {
+                    data.Add(new string[7]);
+                    data[data.Count - 1][0] = reader[0].ToString();
+                    data[data.Count - 1][1] = reader[1].ToString();
+                    data[data.Count - 1][2] = reader[2].ToString();
+                    data[data.Count - 1][3] = (Convert.ToDateTime(reader[3]).ToShortDateString()).ToString();
+                    data[data.Count - 1][4] = (Convert.ToDateTime(reader[4]).ToShortDateString()).ToString();
+                    data[data.Count - 1][5] = reader[5].ToString();
+                    data[data.Count - 1][6] = reader[6].ToString();
+                }
+                reader.Close();
+                conn.Close();
+
+
+                foreach (string[] s in data)
+                    dataGridView.Rows.Add(s);
+            
+        }
+
+        public RefrigeratorClass SearchConsignment(string numberConsignment)
+        {
+
+            RefrigeratorClass refrigeratorClass=new RefrigeratorClass();
+            string sqlExpression = "Select Camera,Column_Box,Rows_Box,Storey From Refrigerator Where FK_Code_New_Consignment = '"+ numberConsignment + "'";
+
+            conn.Open();
+            SqlCommand cmd = new SqlCommand(sqlExpression, conn);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+        
+            List<string[]> data = new List<string[]>();
+
+            while (reader.Read())
+            {
+                refrigeratorClass = new RefrigeratorClass(reader.GetValue(0).ToString(),reader.GetValue(1).ToString(),Convert.ToInt32(reader.GetValue(2)),Convert.ToInt32(reader.GetValue(3)));
+            }
+            reader.Close();
+            conn.Close();
+
+            return refrigeratorClass;
+
+
+
         }
 
         public int LoadCountConsignmentInCell(RefrigeratorClass refrigeratorClass)
@@ -1115,7 +1345,7 @@ namespace Garlic.SQL
             {
                 if (conn != null)
                 {
-                    MessageBox.Show("Партію ");
+                    MessageBox.Show("Партію "+ writeOffClass.NumberConsignment +" списано");
                     conn.Close();
                 }
             }
@@ -1186,6 +1416,95 @@ namespace Garlic.SQL
             }
        
         }
+
+        public bool CheckProcess(string number)
+        {
+            string Process="";
+            try
+            {
+                conn.Open();
+       
+                string query = "Select State_Consignment FROM New_Consignment WHERE Code_New_Consignment = '"+ number + "'";
+                int i = 0;
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+              
+                    while (reader.Read())
+                    {
+                        Process = reader.GetValue(0).ToString();
+                    }
+                    reader.NextResult();
+
+                if(Process== "in refrigerator")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+              
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public void SearchNewConsignment(DataGridView dataGridView, string Process, string numberConsignment)
+        {
+            string sqlExpression = "sp_ViewNewConsignmentProcess";
+
+            conn.Open();
+            SqlCommand command = new SqlCommand(sqlExpression, conn);
+
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+
+            SqlParameter ProcessParam = new SqlParameter
+            {
+                ParameterName = "@Process",
+                Value = Process
+            };
+            command.Parameters.Add(ProcessParam);
+
+            SqlParameter NumberConsignment = new SqlParameter
+            {
+                ParameterName = "@Number_Consignment",
+                Value = numberConsignment
+            };
+            command.Parameters.Add(NumberConsignment);
+            SqlDataReader reader = command.ExecuteReader();
+            List<string[]> data = new List<string[]>();
+
+            while (reader.Read())
+            {
+                data.Add(new string[6]);
+                data[data.Count - 1][0] = reader[0].ToString();
+                data[data.Count - 1][1] = (Convert.ToDateTime(reader[1]).ToShortDateString()).ToString();
+                data[data.Count - 1][2] = reader[2].ToString();
+                data[data.Count - 1][3] = reader[3].ToString();
+                data[data.Count - 1][4] = reader[4].ToString();
+                data[data.Count - 1][5] = reader[5].ToString();
+       
+            }
+            reader.Close();
+            conn.Close();
+
+
+            foreach (string[] s in data)
+                dataGridView.Rows.Add(s);
+
+        }
+
 
         public void InsertInRefrigerator(string camera, string column, int rows, int storey, DateTime date, string numberConsignment)
         {

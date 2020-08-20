@@ -105,7 +105,7 @@ namespace Garlic
 
             SellClass sell = new SellClass(Convert.ToDateTime(Convert.ToDateTime(dTPDate.Value.ToShortDateString())), Convert.ToDouble(valuePrice.Text), Convert.ToDouble(ValueTotalPrice.Text), SellClass.NumberConsignment, SellClass.CodeRefrigerator);
             Main.sQLFunction.InsertSell(sell);
-            Main.sQLFunction.RelocationRefrigerator(refrigeratorClass);
+            Main.sQLFunction.RelocationRefrigerator(refrigeratorClass,"Sell");
           
     
 
@@ -120,6 +120,12 @@ namespace Garlic
         {
             if(valuePrice.Text!="")
             {
+                if (Convert.ToDouble(valuePrice.Text) == 0)
+                {
+                    MessageBox.Show("Ціна не може дорівнювати нулю");
+                    valuePrice.Text = "";
+                }
+                else
                 ValueTotalPrice.Text = Math.Round((Convert.ToDouble(valuePrice.Text) * Convert.ToDouble(valueWeight.Text)), 2).ToString();
             }
         }
@@ -165,6 +171,15 @@ namespace Garlic
             TableNewConsignment.Rows.Clear();
             Main.sQLFunction.SearchConsignmentSellBtDate(TableNewConsignment, Convert.ToDateTime(dTPFrom.Value.ToShortDateString()), Convert.ToDateTime(dTPTo.Value.ToShortDateString()));
            
+        }
+
+        private void valuePrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char number = e.KeyChar;
+            if (!Char.IsDigit(number) && number != 8 && number != 44) // цифры, клавиша BackSpace и запятая
+            {
+                e.Handled = true;
+            }
         }
     }
 }

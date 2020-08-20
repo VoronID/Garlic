@@ -54,7 +54,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Калібер = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Калібр = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TableGarlic = new System.Windows.Forms.DataGridView();
@@ -228,7 +228,7 @@
             this.Column1,
             this.Column2,
             this.Column5,
-            this.Калібер,
+            this.Калібр,
             this.Column6,
             this.Column7});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -275,10 +275,10 @@
             this.Column5.HeaderText = "Вага";
             this.Column5.Name = "Column5";
             // 
-            // Калібер
+            // Калібр
             // 
-            this.Калібер.HeaderText = "Калібер";
-            this.Калібер.Name = "Калібер";
+            this.Калібр.HeaderText = "Калібр";
+            this.Калібр.Name = "Калібр";
             // 
             // Column6
             // 
@@ -384,6 +384,10 @@
             this.valueCaliber.Name = "valueCaliber";
             this.valueCaliber.Size = new System.Drawing.Size(165, 31);
             this.valueCaliber.TabIndex = 29;
+            this.valueCaliber.TextChanged += new System.EventHandler(this.valueCaliber_TextChanged);
+            this.valueCaliber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valueCaliber_KeyPress);
+            this.valueCaliber.Leave += new System.EventHandler(this.valueCaliber_Leave);
+            this.valueCaliber.MouseLeave += new System.EventHandler(this.valueCaliber_MouseLeave);
             // 
             // valueWeight
             // 
@@ -392,6 +396,9 @@
             this.valueWeight.Name = "valueWeight";
             this.valueWeight.Size = new System.Drawing.Size(165, 31);
             this.valueWeight.TabIndex = 30;
+            this.valueWeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valueWeight_KeyPress);
+            this.valueWeight.Leave += new System.EventHandler(this.valueWeight_Leave);
+            this.valueWeight.MouseLeave += new System.EventHandler(this.valueWeight_MouseLeave);
             // 
             // labelEnd
             // 
@@ -479,12 +486,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         protected System.Windows.Forms.DataGridView TableNewConsignment;
+        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Калібер;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Калібр;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

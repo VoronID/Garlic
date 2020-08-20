@@ -439,9 +439,9 @@
             this.label4.Font = new System.Drawing.Font("Century Gothic", 18F);
             this.label4.Location = new System.Drawing.Point(288, 330);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 30);
+            this.label4.Size = new System.Drawing.Size(94, 30);
             this.label4.TabIndex = 33;
-            this.label4.Text = "Калібер";
+            this.label4.Text = "Калібр";
             // 
             // label3
             // 
@@ -571,7 +571,7 @@
             // 
             // Калібер
             // 
-            this.Калібер.HeaderText = "Калібер";
+            this.Калібер.HeaderText = "Калібр";
             this.Калібер.Name = "Калібер";
             // 
             // Column6

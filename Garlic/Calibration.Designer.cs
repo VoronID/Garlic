@@ -35,7 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelSearch = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.valueCodeConsignment = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -46,12 +46,12 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.TableConsignment = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dtPDate = new System.Windows.Forms.DateTimePicker();
             this.labelDate = new System.Windows.Forms.Label();
@@ -65,7 +65,7 @@
             // panelSearch
             // 
             this.panelSearch.BackColor = System.Drawing.Color.White;
-            this.panelSearch.Controls.Add(this.textBox3);
+            this.panelSearch.Controls.Add(this.valueCodeConsignment);
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Controls.Add(this.button1);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
@@ -74,14 +74,16 @@
             this.panelSearch.Size = new System.Drawing.Size(1026, 0);
             this.panelSearch.TabIndex = 0;
             // 
-            // textBox3
+            // valueCodeConsignment
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBox3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(380, -74);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(441, 31);
-            this.textBox3.TabIndex = 14;
+            this.valueCodeConsignment.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.valueCodeConsignment.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.valueCodeConsignment.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.valueCodeConsignment.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.valueCodeConsignment.Location = new System.Drawing.Point(380, -74);
+            this.valueCodeConsignment.Name = "valueCodeConsignment";
+            this.valueCodeConsignment.Size = new System.Drawing.Size(441, 31);
+            this.valueCodeConsignment.TabIndex = 14;
             // 
             // label1
             // 
@@ -112,6 +114,7 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel2
             // 
@@ -205,12 +208,12 @@
             this.TableConsignment.ColumnHeadersHeight = 50;
             this.TableConsignment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
+            this.Column6,
+            this.Column7,
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7});
+            this.Column5});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -238,13 +241,22 @@
             this.TableConsignment.Size = new System.Drawing.Size(964, 486);
             this.TableConsignment.StandardTab = true;
             this.TableConsignment.TabIndex = 14;
-            this.TableConsignment.Visible = false;
             this.TableConsignment.DoubleClick += new System.EventHandler(this.TableConsignment_DoubleClick);
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Номер партії";
             this.Column1.Name = "Column1";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Сорт";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Тип";
+            this.Column7.Name = "Column7";
             // 
             // Column2
             // 
@@ -265,16 +277,6 @@
             // 
             this.Column5.HeaderText = "Вага";
             this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Сорт";
-            this.Column6.Name = "Column6";
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Тип";
-            this.Column7.Name = "Column7";
             // 
             // panel1
             // 
@@ -338,7 +340,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelSearch;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox valueCodeConsignment;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
@@ -348,15 +350,15 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel5;
         protected System.Windows.Forms.DataGridView TableConsignment;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker dtPDate;
+        private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker dtPDate;
-        private System.Windows.Forms.Label labelDate;
     }
 }

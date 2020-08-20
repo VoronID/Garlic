@@ -75,7 +75,9 @@ namespace Garlic
         {
             if (Password.Text == "ПАРОЛЬ")
             {
+                Password.UseSystemPasswordChar = true;
                 Password.Text = "";
+           
                 Password.ForeColor = Color.Black;
             }
         }
@@ -84,6 +86,8 @@ namespace Garlic
         {
             if (Password.Text == "")
             {
+                Password.UseSystemPasswordChar = false;
+
                 Password.Text = "ПАРОЛЬ";
                 Password.ForeColor = Color.Black;
             }
